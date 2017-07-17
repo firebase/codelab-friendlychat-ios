@@ -1,0 +1,55 @@
+osx_image: xcode8.3
+language: objective-c
+cache:
+  - bundler
+  - cocoapods
+rvm: 2.3.1
+
+podfile: ios/objc/Podfile
+ios-starter/objc-starter/Podfile
+ios/swift/Podfile
+ios-starter/swift-starter/Podfile
+
+com.google.firebase.codelab.FriendlyChatObjC
+com.google.firebase.codelab.FriendlyChatSwift
+
+env: 
+  - LANGUAGE=ObjC
+  - LANGUAGE=Swift
+
+
+matrix:
+  include:
+    - podfile: ios/objc/Podfile
+      env: LANGUAGE=ObjC
+    - podfile: ios-starter/objc-starter/Podfile
+      env: LANGUAGE=ObjC
+      before_install:
+        - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
+        - gem install xcpretty
+        - cd ios-starter/$LANGUAGE
+        - bundle exec pod install --repo-update
+        - cd -
+    - podfile: ios/swift/Podfile
+      env: LANGUAGE=Swift
+    - podfile: ios-starter/swift-starter/Podfile
+      env: LANGUAGE=Swift
+      before_install:
+        - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
+        - gem install xcpretty
+        - cd ios-starter/$LANGUAGE
+        - bundle exec pod install --repo-update
+        - cd -
+
+before_install:
+  - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
+  - gem install xcpretty
+  - cd ios/$LANGUAGE
+  - bundle exec pod install --repo-update
+  - cp ../mock-GoogleService-Info.plist ./GoogleService-Info.plist
+  - sed -i '' '/<key>BUNDLE_ID</{n;s/id/com.google.firebase.codelab.FriendlyChat'$LANGUAGE'/;}' GoogleService-Info.plist
+  - sed -i '' 's/YOUR_REVERSED_CLIENT_ID/com.googleusercontent.apps.123456789000-hjugbg6ud799v4c49dim8ce2usclthar/' FriendlyChat"$LANGUAGE"/Info.plist
+  - ruby ../info_script.rb $SAMPLE
+  - cd -
+
+script: ./test.sh
