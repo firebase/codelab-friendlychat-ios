@@ -5,19 +5,6 @@ cache:
   - cocoapods
 rvm: 2.3.1
 
-podfile: ios/objc/Podfile
-ios-starter/objc-starter/Podfile
-ios/swift/Podfile
-ios-starter/swift-starter/Podfile
-
-com.google.firebase.codelab.FriendlyChatObjC
-com.google.firebase.codelab.FriendlyChatSwift
-
-env: 
-  - LANGUAGE=ObjC
-  - LANGUAGE=Swift
-
-
 matrix:
   include:
     - podfile: ios/objc/Podfile
