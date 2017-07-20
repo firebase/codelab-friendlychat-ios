@@ -13,6 +13,7 @@ matrix:
       env: LANGUAGE=ObjC
       before_install:
         - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
+        - bundle install
         - gem install xcpretty
         - cd ios-starter/$LANGUAGE
         - bundle exec pod install --repo-update
@@ -23,6 +24,7 @@ matrix:
       env: LANGUAGE=Swift
       before_install:
         - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
+        - bundle install
         - gem install xcpretty
         - cd ios-starter/$LANGUAGE
         - bundle exec pod install --repo-update
@@ -30,6 +32,7 @@ matrix:
 
 before_install:
   - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
+  - bundle install
   - gem install xcpretty
   - cd ios/$LANGUAGE
   - bundle exec pod install --repo-update
