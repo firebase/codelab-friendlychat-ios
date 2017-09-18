@@ -1,6 +1,6 @@
 require 'xcodeproj'
 language = ARGV[0]
-project_path = "#FriendlyChat{language}.xcodeproj"
+project_path = "FriendlyChat#{language}.xcodeproj"
 project = Xcodeproj::Project.open(project_path)
 
 # Add a file to the project in the main group
