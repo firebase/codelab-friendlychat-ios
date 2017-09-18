@@ -1,5 +1,5 @@
 require 'xcodeproj'
-sample = ARGV[0]
+language = ARGV[0]
 project_path = "#FriendlyChat{language}.xcodeproj"
 project = Xcodeproj::Project.open(project_path)
 
