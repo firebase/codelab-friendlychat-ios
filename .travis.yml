@@ -5,12 +5,12 @@ cache:
   - cocoapods
 rvm: 2.3.1
 
-podfile: ios/objc/Podfile
-env: 
-  - LANGUAGE=ObjC, DIR=ios
-
 matrix:
   include:
+    - podfile: ios/objc/Podfile
+      env: 
+        - LANGUAGE=ObjC
+        - DIR=ios
     - podfile: ios-starter/objc-starter/Podfile
       env:
         - LANGUAGE=ObjC
@@ -19,13 +19,13 @@ matrix:
         - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
         - bundle install
         - gem install xcpretty
-        - cd ios-starter/$LANGUAGE
+        - cd ios-starter/objc-starter
         - bundle exec pod install --repo-update
         - cd -
     - podfile: ios/swift/Podfile
       env: 
         - LANGUAGE=Swift
-        -  DIR=ios
+        - DIR=ios
     - podfile: ios-starter/swift-starter/Podfile
       env: 
         - LANGUAGE=Swift
@@ -34,7 +34,7 @@ matrix:
         - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
         - bundle install
         - gem install xcpretty
-        - cd ios-starter/$LANGUAGE
+        - cd ios-starter/swift-starter
         - bundle exec pod install --repo-update
         - cd -
 
