@@ -16,6 +16,7 @@
 
 #import "Constants.h"
 #import "FCViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 @import Photos;
 
@@ -62,7 +63,6 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
   [self configureRemoteConfig];
   [self fetchConfig];
   [self loadAd];
-  [self logViewLoaded];
 }
 
 - (void)dealloc {
@@ -129,8 +129,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 }
 
 - (IBAction)didPressCrash:(id)sender {
-  FIRCrashLog(@"Cause Crash button clicked");
-  assert(NO);
+    NSLog(@"Crash button pressed!");
+    [[Crashlytics sharedInstance] crash];
+    assert(NO);
 }
 
 - (IBAction)inviteTapped:(id)sender {
@@ -166,12 +167,6 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                     otherButtonTitles:nil] show];
 }
 
-- (void)logViewLoaded {
-  // Log that the view did load, FIRCrashNSLog is used here so the log message will be
-  // shown in the console output. If FIRCrashLog is used the message is not shown in
-  // the console output.
-  FIRCrashNSLog(@"View loaded");
-}
 
 - (void)loadAd {
   self.banner.adUnitID = kBannerAdUnitID;
