@@ -16,6 +16,7 @@
 
 #import "Constants.h"
 #import "FCViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 @import Photos;
 
@@ -63,7 +64,6 @@ static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/293473571
   [self configureRemoteConfig];
   [self fetchConfig];
   [self loadAd];
-  [self logViewLoaded];
 }
 
 - (void)dealloc {
@@ -90,13 +90,11 @@ static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/293473571
 }
 
 - (IBAction)didPressCrash:(id)sender {
+  NSLog(@"Crash button pressed!");
   assert(NO);
 }
 
 - (IBAction)inviteTapped:(id)sender {
-}
-
-- (void)logViewLoaded {
 }
 
 - (void)loadAd {
