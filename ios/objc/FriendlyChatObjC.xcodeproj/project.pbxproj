@@ -18,7 +18,6 @@
 		10AF4CC81DD237AD0096D192 /* Bladefile in Resources */ = {isa = PBXBuildFile; fileRef = 10AF4CC41DD237AD0096D192 /* Bladefile */; };
 		10AF4CC91DD237AD0096D192 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10AF4CC51DD237AD0096D192 /* Images.xcassets */; };
 		10AF4CCA1DD237AD0096D192 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10AF4CC61DD237AD0096D192 /* LaunchScreen.xib */; };
-		778B6CD11FDF12FA004AF0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 778B6CD01FDF12F9004AF0AF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		10AF4CC41DD237AD0096D192 /* Bladefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bladefile; sourceTree = "<group>"; };
 		10AF4CC51DD237AD0096D192 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		10AF4CC61DD237AD0096D192 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		778B6CD01FDF12F9004AF0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +73,6 @@
 		107960821C6130EF003DB6CC /* FriendlyChatObjC */ = {
 			isa = PBXGroup;
 			children = (
-				778B6CD01FDF12F9004AF0AF /* GoogleService-Info.plist */,
 				106E09CD1E4E904600A0FA44 /* FriendlyChatObjC.entitlements */,
 				107960861C6130EF003DB6CC /* AppDelegate.h */,
 				107960871C6130EF003DB6CC /* AppDelegate.m */,
@@ -188,7 +185,6 @@
 				10AF4CC91DD237AD0096D192 /* Images.xcassets in Resources */,
 				107960A91C6131B6003DB6CC /* Main.storyboard in Resources */,
 				10AF4CC71DD237AD0096D192 /* logo1024.png in Resources */,
-				778B6CD11FDF12FA004AF0AF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
