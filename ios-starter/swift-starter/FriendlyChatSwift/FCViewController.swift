@@ -19,6 +19,7 @@ import UIKit
 
 import Firebase
 import GoogleMobileAds
+import Crashlytics
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
@@ -56,7 +57,6 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
     configureRemoteConfig()
     fetchConfig()
     loadAd()
-    logViewLoaded()
   }
 
   deinit {
@@ -83,13 +83,9 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   }
 
   @IBAction func didPressCrash(_ sender: AnyObject) {
-    fatalError()
   }
 
   @IBAction func inviteTapped(_ sender: AnyObject) {
-  }
-
-  func logViewLoaded() {
   }
 
   func loadAd() {

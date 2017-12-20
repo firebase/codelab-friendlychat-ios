@@ -21,6 +21,7 @@
 
 @import Firebase;
 @import GoogleMobileAds;
+@import Crashlytics;
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
@@ -63,7 +64,6 @@ static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/293473571
   [self configureRemoteConfig];
   [self fetchConfig];
   [self loadAd];
-  [self logViewLoaded];
 }
 
 - (void)dealloc {
@@ -90,13 +90,11 @@ static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/293473571
 }
 
 - (IBAction)didPressCrash:(id)sender {
+  NSLog(@"Crash button pressed!");
   assert(NO);
 }
 
 - (IBAction)inviteTapped:(id)sender {
-}
-
-- (void)logViewLoaded {
 }
 
 - (void)loadAd {
