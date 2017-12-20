@@ -79,7 +79,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 }
 
 - (void)configureStorage {
-    self.storageRef = [[FIRStorage storage] reference];
+  self.storageRef = [[FIRStorage storage] reference];
 }
 
 - (void)configureRemoteConfig {
@@ -129,9 +129,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 }
 
 - (IBAction)didPressCrash:(id)sender {
-    NSLog(@"Crash button pressed!");
-    [[Crashlytics sharedInstance] crash];
-    assert(NO);
+  NSLog(@"Crash button pressed!");
+  [[Crashlytics sharedInstance] crash];
+  assert(NO);
 }
 
 - (IBAction)inviteTapped:(id)sender {
