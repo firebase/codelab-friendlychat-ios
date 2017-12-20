@@ -16,12 +16,12 @@
 
 #import "Constants.h"
 #import "FCViewController.h"
-#import <Crashlytics/Crashlytics.h>
 
 @import Photos;
 
 @import Firebase;
 @import GoogleMobileAds;
+@import Crashlytics;
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
