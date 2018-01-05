@@ -1,4 +1,4 @@
-osx_image: xcode8.3
+osx_image: xcode9.2
 language: objective-c
 cache:
   - bundler
@@ -16,7 +16,6 @@ matrix:
         - LANGUAGE=ObjC
         - DIR=ios-starter/objc-starter
       before_install:
-        - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
         - bundle install
         - gem install xcpretty
         - cd ios-starter/objc-starter
@@ -31,7 +30,6 @@ matrix:
         - LANGUAGE=Swift
         - DIR=ios-starter/swift-starter
       before_install:
-        - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
         - bundle install
         - gem install xcpretty
         - cd ios-starter/swift-starter
@@ -39,7 +37,6 @@ matrix:
         - cd -
 
 before_install:
-  - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
   - bundle install
   - gem install xcpretty
   - cd ios/$LANGUAGE
@@ -52,3 +49,7 @@ before_install:
   - cd -
 
 script: ./test.sh
+
+branches:
+  only:
+    - master
