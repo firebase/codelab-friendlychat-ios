@@ -196,7 +196,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
   FIRDataSnapshot *messageSnapshot = _messages[indexPath.row];
   NSDictionary<NSString *, NSString *> *message = messageSnapshot.value;
   NSString *name = message[MessageFieldsname];
-  NSString *imageURL = message[MessageFieldsimageUrl];
+  NSString *imageURL = message[MessageFieldsimageURL];
   if (imageURL) {
     if ([imageURL hasPrefix:@"gs://"]) {
       [[[FIRStorage storage] referenceForURL:imageURL] dataWithMaxSize:INT64_MAX
@@ -218,7 +218,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     NSString *text = message[MessageFieldstext];
     cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", name, text];
     cell.imageView.image = [UIImage imageNamed: @"ic_account_circle"];
-    NSString *photoURL = message[MessageFieldsphotoUrl];
+    NSString *photoURL = message[MessageFieldsphotoURL];
     if (photoURL) {
       NSURL *URL = [NSURL URLWithString:photoURL];
       if (URL) {
@@ -245,7 +245,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
   mdata[MessageFieldsname] = [FIRAuth auth].currentUser.displayName;
   NSURL *photoURL = [FIRAuth auth].currentUser.photoURL;
   if (photoURL) {
-    mdata[MessageFieldsphotoUrl] = photoURL.absoluteString;
+    mdata[MessageFieldsphotoURL] = photoURL.absoluteString;
   }
 
   // Push data to Firebase Database
@@ -289,7 +289,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
                                               NSLog(@"Error uploading: %@", error);
                                               return;
                                             }
-                                            [self sendMessage:@{MessageFieldsimageUrl:[_storageRef child:metadata.path].description}];
+                                            [self sendMessage:@{MessageFieldsimageURL:[_storageRef child:metadata.path].description}];
                                     }
                                 ];
                              }];
@@ -308,7 +308,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
                                     NSLog(@"Error uploading: %@", error);
                                     return;
                                   }
-                                  [self sendMessage:@{MessageFieldsimageUrl:[_storageRef child:metadata.path].description}];
+                                  [self sendMessage:@{MessageFieldsimageURL:[_storageRef child:metadata.path].description}];
                                 }];
   }
 }

@@ -25,7 +25,7 @@ NSString *const SeguesFpToSignIn = @"FPToSignIn";
 
 NSString *const MessageFieldsname = @"name";
 NSString *const MessageFieldstext = @"text";
-NSString *const MessageFieldsphotoUrl = @"photoUrl";
-NSString *const MessageFieldsimageUrl = @"imageUrl";
+NSString *const MessageFieldsphotoURL = @"photoUrl";
+NSString *const MessageFieldsimageURL = @"imageUrl";
 
 @end
