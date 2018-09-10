@@ -185,7 +185,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
     let messageSnapshot: DataSnapshot! = self.messages[indexPath.row]
     guard let message = messageSnapshot.value as? [String:String] else { return cell }
     let name = message[Constants.MessageFields.name] ?? ""
-    if let imageURL = message[Constants.MessageFields.imageURL] {
+    if let imageURL = message[Constants.MessageFields.imageUrl] {
       if imageURL.hasPrefix("gs://") {
         Storage.storage().reference(forURL: imageURL).getData(maxSize: INT64_MAX) {(data, error) in
           if let error = error {
@@ -205,7 +205,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
       let text = message[Constants.MessageFields.text] ?? ""
       cell.textLabel?.text = name + ": " + text
       cell.imageView?.image = UIImage(named: "ic_account_circle")
-      if let photoURL = message[Constants.MessageFields.photoURL], let URL = URL(string: photoURL),
+      if let photoURL = message[Constants.MessageFields.photoUrl], let URL = URL(string: photoURL),
           let data = try? Data(contentsOf: URL) {
         cell.imageView?.image = UIImage(data: data)
       }
@@ -227,7 +227,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
     var mdata = data
     mdata[Constants.MessageFields.name] = Auth.auth().currentUser?.displayName
     if let photoURL = Auth.auth().currentUser?.photoURL {
-      mdata[Constants.MessageFields.photoURL] = photoURL.absoluteString
+      mdata[Constants.MessageFields.photoUrl] = photoURL.absoluteString
     }
 
     // Push data to Firebase Database
@@ -268,7 +268,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
               print("Error uploading: \(nsError.localizedDescription)")
               return
             }
-            strongSelf.sendMessage(withData: [Constants.MessageFields.imageURL: strongSelf.storageRef.child((metadata?.path)!).description])
+            strongSelf.sendMessage(withData: [Constants.MessageFields.imageUrl: strongSelf.storageRef.child((metadata?.path)!).description])
           }
       })
     } else {
@@ -284,7 +284,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
             return
           }
           guard let strongSelf = self else { return }
-          strongSelf.sendMessage(withData: [Constants.MessageFields.imageURL: strongSelf.storageRef.child((metadata?.path)!).description])
+          strongSelf.sendMessage(withData: [Constants.MessageFields.imageUrl: strongSelf.storageRef.child((metadata?.path)!).description])
       }
     }
   }
