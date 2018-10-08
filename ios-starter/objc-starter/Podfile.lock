@@ -1,7 +1,7 @@
 PODS:
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
-  - Fabric (1.7.11)
+  - Fabric (1.7.13)
   - Firebase/AdMob (4.13.0):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (= 7.30.0)
@@ -154,7 +154,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
-  Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
+  Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   FirebaseABTesting: d07d0ee833b842d5153549e4c7e2e2cb1c23a3f9
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
