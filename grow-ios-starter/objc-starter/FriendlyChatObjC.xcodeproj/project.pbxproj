@@ -18,7 +18,6 @@
 		10AF4CD21DD238C00096D192 /* Bladefile in Resources */ = {isa = PBXBuildFile; fileRef = 10AF4CCE1DD238C00096D192 /* Bladefile */; };
 		10AF4CD31DD238C00096D192 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10AF4CCF1DD238C00096D192 /* Images.xcassets */; };
 		10AF4CD41DD238C00096D192 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10AF4CD01DD238C00096D192 /* LaunchScreen.xib */; };
-		322D9866217CDC2F00A4F473 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 322D9865217CDC2F00A4F473 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +39,6 @@
 		10AF4CCE1DD238C00096D192 /* Bladefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bladefile; sourceTree = "<group>"; };
 		10AF4CCF1DD238C00096D192 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		10AF4CD01DD238C00096D192 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		322D9865217CDC2F00A4F473 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +55,6 @@
 		107960771C6130EF003DB6CC = {
 			isa = PBXGroup;
 			children = (
-				322D9865217CDC2F00A4F473 /* GoogleService-Info.plist */,
 				10AF4CCB1DD238C00096D192 /* shared */,
 				107960821C6130EF003DB6CC /* FriendlyChatObjC */,
 				107960811C6130EF003DB6CC /* Products */,
@@ -189,7 +186,6 @@
 				10AF4CD31DD238C00096D192 /* Images.xcassets in Resources */,
 				107960A91C6131B6003DB6CC /* Main.storyboard in Resources */,
 				10AF4CD11DD238C00096D192 /* logo1024.png in Resources */,
-				322D9866217CDC2F00A4F473 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
