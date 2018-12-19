@@ -50,6 +50,7 @@ didSignInForUser:(GIDGoogleUser *)user
 
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [FIRApp configure];
   [GIDSignIn sharedInstance].delegate = self;
   return YES;
 }

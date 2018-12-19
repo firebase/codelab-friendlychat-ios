@@ -161,10 +161,20 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     picker.dismiss(animated: true, completion:nil)
   }
-
+    
   @IBAction func signOut(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
+    let firebaseAuth = Auth.auth()
+      do {
+        try firebaseAuth.signOut()
+        dismiss(animated: true, completion: nil)
+      } catch let signOutError as NSError {
+        print ("Error signing out: \(signOutError.localizedDescription)")
+      }
   }
+    
+  //@IBAction func signOut(_ sender: UIButton) {
+    //dismiss(animated: true, completion: nil)
+  //}
 
   func showAlert(withTitle title: String, message: String) {
     DispatchQueue.main.async {
