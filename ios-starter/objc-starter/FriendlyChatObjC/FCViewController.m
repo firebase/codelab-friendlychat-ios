@@ -122,7 +122,9 @@ static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/293473571
 }
 
 - (IBAction)didPressFreshConfig:(id)sender {
-  [self fetchConfig];
+    //[[Crashlytics sharedInstance] crash];
+    //Commented this out to include the line above to initiate crash
+    [self fetchConfig];
 }
 
 - (IBAction)didSendMessage:(UIButton *)sender {
