@@ -204,7 +204,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseDynamicLinks: 83a0071c95ad715bc324fcb8f51028d5b6a58af0
   FirebaseInstanceID: 97ea7a5dca9afd72c79bfcdddb7a44aa1cbb42a1
-  FirebaseInvites: da663c2436b88c2f56d13f38ea71e9055dc4c53d
+  FirebaseInvites: f13ed69fae140e705baec1a59ff127334b841a8a
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   Google-Mobile-Ads-SDK: fec4a72b71a81302d3fd75454df3417c03c50ed5
