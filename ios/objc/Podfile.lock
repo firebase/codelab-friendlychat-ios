@@ -173,7 +173,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 5f0bc6134c5c237cf55f9e1249d406770a75eafd
   FirebaseDynamicLinks: 38b68641d24e78d0277a9205d988ce22875d5a25
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
-  FirebaseInvites: ae15e0636f9eb42bdf5c1ef4c8f7bd4a88f9878b
+  FirebaseInvites: 2679f61d3d554ec11f0b685d27cd54b91833c54a
   FirebaseMessaging: 75cdb862e86c30e0913a2ff307e48d49357c5b73
   FirebaseRemoteConfig: 3e95fb7c072308492e85fa41d59d38b3d6fd2372
   FirebaseStorage: 0c223481c8f89ed300cf1239ddd2d9833622c65f
