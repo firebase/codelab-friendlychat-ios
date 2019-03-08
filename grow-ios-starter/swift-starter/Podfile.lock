@@ -65,10 +65,10 @@ PODS:
   - FirebaseInAppMessagingDisplay (0.13.0):
     - FirebaseCore
     - FirebaseInAppMessaging (>= 0.12.0)
-  - FirebaseInstanceID (3.6.0):
-    - FirebaseCore (~> 5.3)
-    - GoogleUtilities/Environment (~> 5.3)
-    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseInstanceID (3.7.0):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/UserDefaults (~> 5.2)
   - FirebaseRemoteConfig (3.1.0):
     - FirebaseABTesting (~> 2.0)
     - FirebaseAnalytics (~> 5.3)
@@ -182,7 +182,7 @@ SPEC CHECKSUMS:
   FirebaseDynamicLinks: f209c3caccd82102caa0e91d393e3ccc593501fd
   FirebaseInAppMessaging: 25e8c4408829928b6727fb461e0aef6a43111467
   FirebaseInAppMessagingDisplay: 422729b78889766b647c90edc06cd748e9d2594f
-  FirebaseInstanceID: 7221670e908b41e7ae669600db9d0d201417d0cd
+  FirebaseInstanceID: bd6fc5a258884e206fd5c474ebe4f5b00e21770e
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   Google-Mobile-Ads-SDK: 101ce89b94fdf60ec64ba7b6e9b9d812dc765936
