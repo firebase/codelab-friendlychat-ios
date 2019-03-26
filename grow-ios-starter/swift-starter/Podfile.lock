@@ -82,7 +82,7 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
-  - Google-Mobile-Ads-SDK (7.42.0):
+  - Google-Mobile-Ads-SDK (7.42.1):
     - GoogleAppMeasurement (~> 5.7)
   - GoogleAppMeasurement (5.8.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
@@ -187,7 +187,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: cf488df2f4b79782f0e430b04a0e17c0aa7979b2
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   FirebaseStorage: 6162ef4322502b818d9de0ec552f5226d283de43
-  Google-Mobile-Ads-SDK: c7bec408202526ec4e9ccd025c00f9f30e9f8807
+  Google-Mobile-Ads-SDK: 30a1520469efa03097af62ea0d8f9be773542267
   GoogleAppMeasurement: 1624046ab1bcc5e170061a56ef5679000b079c8e
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
