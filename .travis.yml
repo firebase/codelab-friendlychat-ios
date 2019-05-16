@@ -10,6 +10,18 @@ matrix:
       env: 
         - LANGUAGE=ObjC
         - DIR=ios/objc
+    - podfile: ios/swift/Podfile
+      env: 
+        - LANGUAGE=Swift
+        - DIR=ios/swift
+    - podfile: grow-ios-starter/objc-starter/Podfile
+      env: 
+        - LANGUAGE=ObjC
+        - DIR=grow-ios-starter/objc-starter
+    - podfile: grow-ios-starter/swift-starter/Podfile
+      env: 
+        - LANGUAGE=Swift
+        - DIR=grow-ios-starter/swift-starter
     - podfile: ios-starter/objc-starter/Podfile
       env:
         - LANGUAGE=ObjC
@@ -20,10 +32,6 @@ matrix:
         - cd ios-starter/objc-starter
         - bundle exec pod install --repo-update
         - cd -
-    - podfile: ios/swift/Podfile
-      env: 
-        - LANGUAGE=Swift
-        - DIR=ios/swift
     - podfile: ios-starter/swift-starter/Podfile
       env: 
         - LANGUAGE=Swift
