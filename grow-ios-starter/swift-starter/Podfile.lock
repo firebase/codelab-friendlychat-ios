@@ -105,7 +105,7 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
   - GoogleDataTransport (1.2.0)
-  - GoogleDataTransportCCTSupport (1.0.3):
+  - GoogleDataTransportCCTSupport (1.0.4):
     - GoogleDataTransport (~> 1.2)
     - nanopb
   - GoogleSignIn (5.0.0):
@@ -215,7 +215,7 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: df315e371b29cf935f7ea872e7bdec39462a100e
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
-  GoogleDataTransportCCTSupport: 51134d81fca795c60cc247d1cb6af63c3d67b8d8
+  GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleSignIn: a62edd0516721d2a3db1259a5681b91f9b41c06a
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
