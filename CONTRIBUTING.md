@@ -5,7 +5,6 @@ We'd love for you to contribute to our source code and to make the Firebase Frie
  - [Code of Conduct](#coc)
  - [Question or Problem?](#question)
  - [Issues and Bugs](#issue)
- - [Feature Requests](#feature)
  - [Submission Guidelines](#submit)
  - [Coding Rules](#rules)
  - [Signing the CLA](#cla)
