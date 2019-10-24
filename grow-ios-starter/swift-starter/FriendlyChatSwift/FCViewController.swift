@@ -111,7 +111,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     guard let text = textField.text else { return true }
 
-    let newLength = text.characters.count + string.characters.count - range.length
+    let newLength = text.count + string.count - range.length
     return newLength <= self.msglength.intValue // Bool
   }
 
@@ -182,22 +182,25 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   @IBAction func didTapAddPhoto(_ sender: AnyObject) {
     let picker = UIImagePickerController()
     picker.delegate = self
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-      picker.sourceType = UIImagePickerControllerSourceType.camera
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+      picker.sourceType = UIImagePickerController.SourceType.camera
     } else {
-      picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+      picker.sourceType = UIImagePickerController.SourceType.photoLibrary
     }
 
     present(picker, animated: true, completion:nil)
   }
 
   func imagePickerController(_ picker: UIImagePickerController,
-                             didFinishPickingMediaWithInfo info: [String : Any]) {
+                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
     picker.dismiss(animated: true, completion:nil)
     guard let uid = Auth.auth().currentUser?.uid else { return }
 
     // if it's a photo from the library, not an image from the camera
-    if #available(iOS 8.0, *), let referenceURL = info[UIImagePickerControllerReferenceURL] as? URL {
+    if #available(iOS 8.0, *), let referenceURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as? URL {
       let assets = PHAsset.fetchAssets(withALAssetURLs: [referenceURL], options: nil)
       let asset = assets.firstObject
       asset?.requestContentEditingInput(with: nil, completionHandler: { [weak self] (contentEditingInput, info) in
@@ -215,8 +218,8 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
                 }
       })
     } else {
-      guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-      let imageData = UIImageJPEGRepresentation(image, 0.8)
+      guard let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else { return }
+      let imageData = image.jpegData(compressionQuality: 0.8)
       let imagePath = "\(uid)/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
       let metadata = StorageMetadata()
       metadata.contentType = "image/jpeg"
@@ -256,4 +259,14 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
     }
   }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

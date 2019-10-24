@@ -12,8 +12,8 @@ pod 'Firebase/Database'
 pod 'Firebase/InAppMessagingDisplay'
 pod 'Firebase/RemoteConfig'
 pod 'Firebase/Storage'
-pod 'Fabric', '~> 1.7.11'
-pod 'Crashlytics', '~> 3.10.7'
+pod 'Fabric'
+pod 'Crashlytics'
 
 target 'FriendlyChatSwift' do
 end
