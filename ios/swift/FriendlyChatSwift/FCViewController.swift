@@ -20,7 +20,6 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import GoogleMobileAds
-import Crashlytics
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
@@ -31,7 +30,7 @@ let kBannerAdUnitID = "ca-app-pub-3940256099942544/2934735716"
 
 @objc(FCViewController)
 class FCViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
-    UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, InviteDelegate {
+    UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
   // Instance variables
   @IBOutlet weak var textField: UITextField!
@@ -83,29 +82,21 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
     remoteConfig = RemoteConfig.remoteConfig()
     // Create Remote Config Setting to enable developer mode.
     // Fetching configs from the server is normally limited to 5 requests per hour.
-    // Enabling developer mode allows many more requests to be made per hour, so developers
-    // can test different config values during development.
-    let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: true)
-    remoteConfig.configSettings = remoteConfigSettings!
+    // Setting the fetch interval to zero allows many more requests to be made per
+    // hour, so developers can test different config values during development.
+    let remoteConfigSettings = RemoteConfigSettings()
+    remoteConfigSettings.minimumFetchInterval = 0
+    remoteConfig.configSettings = remoteConfigSettings
   }
 
   func fetchConfig() {
-    var expirationDuration: Double = 3600
-    // If in developer mode cacheExpiration is set to 0 so each fetch will retrieve values from
-    // the server.
-    if self.remoteConfig.configSettings.isDeveloperModeEnabled {
-      expirationDuration = 0
-    }
-
-    // cacheExpirationSeconds is set to cacheExpiration here, indicating that any previously
-    // fetched and cached config would be considered expired because it would have been fetched
-    // more than cacheExpiration seconds ago. Thus the next fetch would go to the server unless
-    // throttling is in progress. The default expiration duration is 43200 (12 hours).
-    remoteConfig.fetch(withExpirationDuration: expirationDuration) { [weak self] (status, error) in
-      if status == .success {
+    // Since the minimum fetch interval is set to zero, the next fetch will go to
+    // the server unless throttling is in progress.
+    // The default expiration duration is 43200 (12 hours).
+    remoteConfig.fetchAndActivate() { [weak self] (status, error) in
+      if status != .error {
         print("Config fetched!")
         guard let strongSelf = self else { return }
-        strongSelf.remoteConfig.activateFetched()
         let friendlyMsgLength = strongSelf.remoteConfig["friendly_msg_length"]
         if friendlyMsgLength.source != .static {
           strongSelf.msglength = friendlyMsgLength.numberValue!
@@ -130,34 +121,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
 
   @IBAction func didPressCrash(_ sender: AnyObject) {
     print("Crash button pressed!")
-    Crashlytics.sharedInstance().crash()
-  }
-
-  @IBAction func inviteTapped(_ sender: AnyObject) {
-    if let invite = Invites.inviteDialog() {
-      invite.setInviteDelegate(self)
-
-      // NOTE: You must have the App Store ID set in your developer console project
-      // in order for invitations to successfully be sent.
-
-      // A message hint for the dialog. Note this manifests differently depending on the
-      // received invitation type. For example, in an email invite this appears as the subject.
-      invite.setMessage("Try this out!\n -\(Auth.auth().currentUser?.displayName ?? "")")
-      // Title for the dialog, this is what the user sees before sending the invites.
-      invite.setTitle("FriendlyChat")
-      invite.setDeepLink("app_url")
-      invite.setCallToActionText("Install!")
-      invite.setCustomImage("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png")
-      invite.open()
-    }
-  }
-
-  func inviteFinished(withInvitations invitationIds: [String], error: Error?) {
-    if let error = error {
-        print("Failed: \(error.localizedDescription)")
-    } else {
-      print("Invitations sent")
-    }
+    fatalError("Crash for Crashlytics")
   }
 
   func loadAd() {
@@ -169,7 +133,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     guard let text = textField.text else { return true }
 
-    let newLength = text.characters.count + string.characters.count - range.length
+    let newLength = text.utf16.count + string.utf16.count - range.length
     return newLength <= self.msglength.intValue // Bool
   }
 
@@ -239,7 +203,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   @IBAction func didTapAddPhoto(_ sender: AnyObject) {
     let picker = UIImagePickerController()
     picker.delegate = self
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
       picker.sourceType = .camera
     } else {
       picker.sourceType = .photoLibrary
@@ -249,12 +213,12 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   }
 
   func imagePickerController(_ picker: UIImagePickerController,
-    didFinishPickingMediaWithInfo info: [String : Any]) {
-      picker.dismiss(animated: true, completion:nil)
+      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    picker.dismiss(animated: true, completion:nil)
     guard let uid = Auth.auth().currentUser?.uid else { return }
 
     // if it's a photo from the library, not an image from the camera
-    if #available(iOS 8.0, *), let referenceURL = info[UIImagePickerControllerReferenceURL] as? URL {
+    if #available(iOS 8.0, *), let referenceURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL {
       let assets = PHAsset.fetchAssets(withALAssetURLs: [referenceURL], options: nil)
       let asset = assets.firstObject
       asset?.requestContentEditingInput(with: nil, completionHandler: { [weak self] (contentEditingInput, info) in
@@ -272,8 +236,8 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
           }
       })
     } else {
-      guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-      let imageData = UIImageJPEGRepresentation(image, 0.8)
+      guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+      let imageData = image.jpegData(compressionQuality: 0.8)
       let imagePath = "\(uid)/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
       let metadata = StorageMetadata()
       metadata.contentType = "image/jpeg"

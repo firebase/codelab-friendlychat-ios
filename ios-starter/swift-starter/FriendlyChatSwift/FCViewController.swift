@@ -19,7 +19,7 @@ import UIKit
 
 import Firebase
 import GoogleMobileAds
-import Crashlytics
+import FirebaseCrashlytics
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
@@ -36,7 +36,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var sendButton: UIButton!
   var ref: DatabaseReference!
-  var messages: [DataSnapshot]! = []
+  var messages: [DataSnapshot] = []
   var msglength: NSNumber = 10
   fileprivate var _refHandle: DatabaseHandle!
 
@@ -93,7 +93,7 @@ class FCViewController: UIViewController, UITableViewDataSource, UITableViewDele
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     guard let text = textField.text else { return true }
 
-    let newLength = text.characters.count + string.characters.count - range.length
+    let newLength = text.utf16.count + string.utf16.count - range.length
     return newLength <= self.msglength.intValue // Bool
   }
 
