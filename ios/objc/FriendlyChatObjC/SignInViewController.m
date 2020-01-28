@@ -29,8 +29,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [GIDSignIn sharedInstance].uiDelegate = self;
-  [[GIDSignIn sharedInstance] signInSilently];
+  [GIDSignIn sharedInstance].presentingViewController = self;
+  [[GIDSignIn sharedInstance] restorePreviousSignIn];
   self.handle = [[FIRAuth auth]
                  addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
                    if (user) {

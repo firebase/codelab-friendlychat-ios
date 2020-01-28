@@ -21,7 +21,7 @@
 
 @import Firebase;
 @import GoogleMobileAds;
-@import Crashlytics;
+@import FirebaseCrashlytics;
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
@@ -31,7 +31,7 @@
 static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/2934735716";
 
 @interface FCViewController ()<UITableViewDataSource, UITableViewDelegate,
-UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FIRInviteDelegate> {
+UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
   int _msglength;
   FIRDatabaseHandle _refHandle;
 }
@@ -73,8 +73,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
   _ref = [[FIRDatabase database] reference];
   // Listen for new messages in the Firebase database
   _refHandle = [[_ref child:@"messages"] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-    [_messages addObject:snapshot];
-    [_clientTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_messages.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+    [self.messages addObject:snapshot];
+    [self.clientTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messages.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
   }];
 }
 
@@ -86,32 +86,24 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
   _remoteConfig = [FIRRemoteConfig remoteConfig];
   // Create Remote Config Setting to enable developer mode.
   // Fetching configs from the server is normally limited to 5 requests per hour.
-  // Enabling developer mode allows many more requests to be made per hour, so developers
-  // can test different config values during development.
-  FIRRemoteConfigSettings *remoteConfigSettings = [[FIRRemoteConfigSettings alloc] initWithDeveloperModeEnabled:YES];
+  // Setting the fetch interval to zero allows many more requests to be made per
+  // hour, so developers can test different config values during development.
+  FIRRemoteConfigSettings *remoteConfigSettings = [[FIRRemoteConfigSettings alloc] init];
+  remoteConfigSettings.minimumFetchInterval = 0;
   self.remoteConfig.configSettings = remoteConfigSettings;
 }
 
 - (void)fetchConfig {
-  long expirationDuration = 3600;
-  // If in developer mode cacheExpiration is set to 0 so each fetch will retrieve values from
-  // the server.
-  if (self.remoteConfig.configSettings.isDeveloperModeEnabled) {
-    expirationDuration = 0;
-  }
-
-  // cacheExpirationSeconds is set to cacheExpiration here, indicating that any previously
-  // fetched and cached config would be considered expired because it would have been fetched
-  // more than cacheExpiration seconds ago. Thus the next fetch would go to the server unless
-  // throttling is in progress. The default expiration duration is 43200 (12 hours).
-  [self.remoteConfig fetchWithExpirationDuration:expirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError *error) {
-    if (status == FIRRemoteConfigFetchStatusSuccess) {
+  // Since the minimum fetch interval is set to zero, the next fetch will go to
+  // the server unless throttling is in progress.
+  // The default expiration duration is 43200 (12 hours).
+  [self.remoteConfig fetchAndActivateWithCompletionHandler:^(FIRRemoteConfigFetchAndActivateStatus status, NSError *error) {
+    if (status != FIRRemoteConfigFetchAndActivateStatusError) {
       NSLog(@"Config fetched!");
-      [_remoteConfig activateFetched];
-      FIRRemoteConfigValue *friendlyMsgLength = _remoteConfig[@"friendly_msg_length"];
+      FIRRemoteConfigValue *friendlyMsgLength = self.remoteConfig[@"friendly_msg_length"];
       if (friendlyMsgLength.source != FIRRemoteConfigSourceStatic) {
-        _msglength = friendlyMsgLength.numberValue.intValue;
-        NSLog(@"Friendly msg length config: %d", _msglength);
+        self->_msglength = friendlyMsgLength.numberValue.intValue;
+        NSLog(@"Friendly msg length config: %d", self->_msglength);
       }
     } else {
       NSLog(@"Config not fetched");
@@ -130,43 +122,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 
 - (IBAction)didPressCrash:(id)sender {
   NSLog(@"Crash button pressed!");
-  [[Crashlytics sharedInstance] crash];
   assert(NO);
 }
-
-- (IBAction)inviteTapped:(id)sender {
-  id<FIRInviteBuilder> inviteDialog = [FIRInvites inviteDialog];
-  [inviteDialog setInviteDelegate:self];
-
-  // NOTE: You must have the App Store ID set in your developer console project
-  // in order for invitations to successfully be sent.
-  NSString *message =
-  [NSString stringWithFormat:@"Try this out!\n -%@",
-   [FIRAuth auth].currentUser.displayName];
-
-  // A message hint for the dialog. Note this manifests differently depending on the
-  // received invitation type. For example, in an email invite this appears as the subject.
-  [inviteDialog setMessage:message];
-
-  // Title for the dialog, this is what the user sees before sending the invites.
-  [inviteDialog setTitle:@"FriendlyChat"];
-  [inviteDialog setDeepLink:@"app_url"];
-  [inviteDialog setCallToActionText:@"Install!"];
-  [inviteDialog setCustomImage:@"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"];
-  [inviteDialog open];
-}
-
-- (void)inviteFinishedWithInvitations:(NSArray *)invitationIds error:(NSError *)error {
-  NSString *message =
-  error ? error.localizedDescription
-  : [NSString stringWithFormat:@"%lu invites sent", (unsigned long)invitationIds.count];
-  [[[UIAlertView alloc] initWithTitle:@"Done"
-                              message:message
-                             delegate:nil
-                    cancelButtonTitle:@"OK"
-                    otherButtonTitles:nil] show];
-}
-
 
 - (void)loadAd {
   self.banner.adUnitID = kBannerAdUnitID;
@@ -282,14 +239,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
                                                        [FIRAuth auth].currentUser.uid,
                                                        (long long)([NSDate date].timeIntervalSince1970 * 1000.0),
                                                        referenceURL.lastPathComponent];
-                                 [[_storageRef child:filePath]
+                                 [[self.storageRef child:filePath]
                                             putFile:imageFile metadata:nil
                                           completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                             if (error) {
                                               NSLog(@"Error uploading: %@", error);
                                               return;
                                             }
-                                            [self sendMessage:@{MessageFieldsimageURL:[_storageRef child:metadata.path].description}];
+                                            [self sendMessage:@{MessageFieldsimageURL:[self.storageRef child:metadata.path].description}];
                                     }
                                 ];
                              }];
@@ -308,7 +265,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
                                     NSLog(@"Error uploading: %@", error);
                                     return;
                                   }
-                                  [self sendMessage:@{MessageFieldsimageURL:[_storageRef child:metadata.path].description}];
+                                  [self sendMessage:@{MessageFieldsimageURL:[self.storageRef child:metadata.path].description}];
                                 }];
   }
 }

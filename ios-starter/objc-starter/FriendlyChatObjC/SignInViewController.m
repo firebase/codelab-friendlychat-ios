@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [GIDSignIn sharedInstance].uiDelegate = self;
+  [GIDSignIn sharedInstance].presentingViewController = self;
 }
 
 - (void)dealloc {
