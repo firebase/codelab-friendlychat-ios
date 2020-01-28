@@ -21,7 +21,7 @@
 
 @import Firebase;
 @import GoogleMobileAds;
-@import Crashlytics;
+@import FirebaseCrashlytics;
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
@@ -31,8 +31,7 @@
 static NSString* const kBannerAdUnitID = @"ca-app-pub-3940256099942544/2934735716";
 
 @interface FCViewController ()<UITableViewDataSource, UITableViewDelegate,
-    UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-        FIRInviteDelegate> {
+    UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
   int _msglength;
   FIRDatabaseHandle _refHandle;
 }

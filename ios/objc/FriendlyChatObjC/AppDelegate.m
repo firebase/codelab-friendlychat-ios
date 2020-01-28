@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 
 @import Firebase;
+@import GoogleSignIn;
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -50,9 +51,7 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-  return [[GIDSignIn sharedInstance] handleURL:url
-                             sourceApplication:sourceApplication
-                                    annotation:annotation];
+  return [[GIDSignIn sharedInstance] handleURL:url];
 }
 
 - (void)signIn:(GIDSignIn *)signIn
@@ -63,7 +62,7 @@ didSignInForUser:(GIDGoogleUser *)user
     FIRAuthCredential *credential =
     [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
                                      accessToken:authentication.accessToken];
-    [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+    [[FIRAuth auth] signInWithCredential:credential completion:^(FIRAuthDataResult * _Nullable result, NSError * _Nullable error) {
       if (error) {
         NSLog(@"Error %@", error.localizedDescription);
       }
@@ -145,7 +144,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 // Handle notification messages after display notification is tapped by the user.
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
-         withCompletionHandler:(void (^)())completionHandler {
+         withCompletionHandler:(void (^)(void))completionHandler {
   NSDictionary *userInfo = response.notification.request.content.userInfo;
   [self showAlert:userInfo];
 
@@ -166,7 +165,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:userInfo[gcmLabel] message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDestructive handler:nil];
         [alert addAction:dismissAction];
-        [_window.rootViewController.presentedViewController presentViewController:alert animated: true completion: nil];
+        [self.window.rootViewController.presentedViewController presentViewController:alert animated: true completion: nil];
       });
     }
   }

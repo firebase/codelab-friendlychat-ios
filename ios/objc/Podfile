@@ -1,16 +1,17 @@
 # FriendlyChat Codelab
 
-platform :ios, '7.0'
+platform :ios, '9.0'
+use_frameworks!
 
 pod 'Firebase/AdMob'
+pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
-pod 'Firebase/Invites'
 pod 'Firebase/Messaging'
 pod 'Firebase/RemoteConfig'
 pod 'Firebase/Storage'
-pod 'Fabric', '~> 1.7.2'
-pod 'Crashlytics', '~> 3.9.3'
+pod 'Firebase/Crashlytics'
+pod 'GoogleSignIn'
 
 target 'FriendlyChatObjC' do
 end
