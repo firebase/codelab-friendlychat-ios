@@ -20,15 +20,15 @@ import Firebase
 import GoogleSignIn
 
 @objc(SignInViewController)
-class SignInViewController: UIViewController, GIDSignInUIDelegate {
+class SignInViewController: UIViewController {
 
   @IBOutlet weak var signInButton: GIDSignInButton!
   var handle: AuthStateDidChangeListenerHandle?
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    GIDSignIn.sharedInstance().uiDelegate = self
-    GIDSignIn.sharedInstance().signInSilently()
+    GIDSignIn.sharedInstance()?.presentingViewController = self
+    GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     handle = Auth.auth().addStateDidChangeListener() { (auth, user) in
       if user != nil {
         MeasurementHelper.sendLoginEvent()
