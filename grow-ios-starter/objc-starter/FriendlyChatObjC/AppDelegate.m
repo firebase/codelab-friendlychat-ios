@@ -34,9 +34,7 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-  return [[GIDSignIn sharedInstance] handleURL:url
-                             sourceApplication:sourceApplication
-                                    annotation:annotation];
+  return [[GIDSignIn sharedInstance] handleURL:url];
 }
 
 - (void)signIn:(GIDSignIn *)signIn
@@ -47,7 +45,7 @@ didSignInForUser:(GIDGoogleUser *)user
         FIRAuthCredential *credential =
         [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
                                          accessToken:authentication.accessToken];
-        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+      [[FIRAuth auth] signInWithCredential:credential completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Error %@", error.localizedDescription);
             }

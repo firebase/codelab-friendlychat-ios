@@ -19,7 +19,6 @@ import UIKit
 
 import Firebase
 import GoogleMobileAds
-import Crashlytics
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers

@@ -20,7 +20,6 @@
 @import Photos;
 
 @import Firebase;
-@import Crashlytics;
 
 /**
  * AdMob ad unit IDs are not currently stored inside the google-services.plist file. Developers
