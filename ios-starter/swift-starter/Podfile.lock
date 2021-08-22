@@ -81,7 +81,7 @@ PODS:
     - GoogleUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
-  - GoogleSignIn (6.0.1):
+  - GoogleSignIn (6.0.2):
     - AppAuth (~> 1.4)
     - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
@@ -160,7 +160,7 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
-  GoogleSignIn: 1b0c4ec33a6fe282f4fa35d8ac64263230ddaf36
+  GoogleSignIn: fd381840dbe7c1137aa6dc30849a5c3e070c034a
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 3df19e3c24f7bbc291d8b5809aa6b0d41e642437
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
