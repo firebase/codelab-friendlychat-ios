@@ -104,7 +104,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - PromisesObjC (2.0.0)
+  - PromisesObjC (2.1.0)
 
 DEPENDENCIES:
   - Firebase/AdMob
@@ -167,7 +167,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 987526d41b07efb1bedda5e936fe0cb718a03113
   GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
 
 PODFILE CHECKSUM: c2da2e86576ea7478b986b8cce7a46c1da96e450
 
