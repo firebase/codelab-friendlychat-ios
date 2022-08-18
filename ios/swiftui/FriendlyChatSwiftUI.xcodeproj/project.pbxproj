@@ -12,6 +12,8 @@
 		8ED5065028ADA0C70031A996 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED5064F28ADA0C70031A996 /* ContentView.swift */; };
 		8ED5065228ADA0C90031A996 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ED5065128ADA0C90031A996 /* Assets.xcassets */; };
 		8ED5065528ADA0C90031A996 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ED5065428ADA0C90031A996 /* Preview Assets.xcassets */; };
+		8ED5065C28ADABB90031A996 /* FriendlyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED5065B28ADABB80031A996 /* FriendlyMessage.swift */; };
+		8ED5065E28ADAD770031A996 /* FriendlyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED5065D28ADAD770031A996 /* FriendlyMessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		8ED5064F28ADA0C70031A996 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8ED5065128ADA0C90031A996 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8ED5065428ADA0C90031A996 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8ED5065B28ADABB80031A996 /* FriendlyMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyMessage.swift; sourceTree = "<group>"; };
+		8ED5065D28ADAD770031A996 /* FriendlyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyMessageView.swift; sourceTree = "<group>"; };
 		DF4B49E21ADA2FE4F12AF934 /* Pods-FriendlyChatSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendlyChatSwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-FriendlyChatSwiftUI/Pods-FriendlyChatSwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		EDB1D8546804BB90EA4D4B26 /* Pods-FriendlyChatSwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendlyChatSwiftUI.release.xcconfig"; path = "Target Support Files/Pods-FriendlyChatSwiftUI/Pods-FriendlyChatSwiftUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,7 +47,6 @@
 				DF4B49E21ADA2FE4F12AF934 /* Pods-FriendlyChatSwiftUI.debug.xcconfig */,
 				EDB1D8546804BB90EA4D4B26 /* Pods-FriendlyChatSwiftUI.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -72,6 +75,8 @@
 				8ED5064F28ADA0C70031A996 /* ContentView.swift */,
 				8ED5065128ADA0C90031A996 /* Assets.xcassets */,
 				8ED5065328ADA0C90031A996 /* Preview Content */,
+				8ED5065B28ADABB80031A996 /* FriendlyMessage.swift */,
+				8ED5065D28ADAD770031A996 /* FriendlyMessageView.swift */,
 			);
 			path = FriendlyChatSwiftUI;
 			sourceTree = "<group>";
@@ -206,6 +211,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ED5065C28ADABB90031A996 /* FriendlyMessage.swift in Sources */,
+				8ED5065E28ADAD770031A996 /* FriendlyMessageView.swift in Sources */,
 				8ED5065028ADA0C70031A996 /* ContentView.swift in Sources */,
 				8ED5064E28ADA0C70031A996 /* FriendlyChatSwiftUIApp.swift in Sources */,
 			);
