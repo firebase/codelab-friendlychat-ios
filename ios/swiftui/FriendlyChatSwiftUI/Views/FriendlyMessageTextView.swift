@@ -1,5 +1,5 @@
 //
-//  FriendlyChatSwiftUIApp.swift
+//  FriendlyMessageTextView.swift
 //  FriendlyChatSwiftUI
 //
 //  Copyright (c) 2022 Google Inc.
@@ -19,11 +19,24 @@
 
 import SwiftUI
 
-@main
-struct FriendlyChatSwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+struct FriendlyMessageTextView: View {
+  var text: String
+  var isUserText: Bool
+
+  var body: some View {
+    if (isUserText) {
+      Color("FirebaseBlue")
+        .clipShape(RoundedRectangle(cornerRadius: 25))
+      Text(text)
+        .padding()
+        .layoutPriority(1)
+        .foregroundColor(Color.white)
+    } else {
+      Color("FirebaseGray")
+        .clipShape(RoundedRectangle(cornerRadius: 25))
+      Text(text)
+        .padding()
+        .layoutPriority(1)
     }
+  }
 }

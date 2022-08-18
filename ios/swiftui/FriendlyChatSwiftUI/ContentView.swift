@@ -2,84 +2,43 @@
 //  ContentView.swift
 //  FriendlyChatSwiftUI
 //
-//  Created by Rachel Collins on 8/17/22.
+//  Copyright (c) 2022 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 import SwiftUI
 
 struct ContentView: View {
   @State private var newMessageText = ""
-  //temporary until db is connected via Firebase
-  @State private var isPresentingAlert: Bool = false
-  @State private var image = UIImage()
-  @State private var showSheet = false
 
+  // TODO: replace with database messages when Firebase Firestore is connected
   private var messages = [
-    FriendlyMessage(text: "Message 1", name: "Name 1", imageUrl: nil),
-    FriendlyMessage(text: "Message 2", name: nil, imageUrl: nil),
-    FriendlyMessage(text: nil, name: "Name 3", imageUrl: URL(string: "https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png"))
+    FriendlyMessage(text: "What's the Firebase logo?", name: "Dash", imageUrl: nil),
+    FriendlyMessage(text: "Sparky has an image!", name: nil, imageUrl: nil),
+    FriendlyMessage(text: nil, name: "Sparky", imageUrl: URL(string: "https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png"))
   ]
-
-  func presentDialog() {
-    if (newMessageText != "") {
-      isPresentingAlert = true
-      newMessageText = ""
-    }
-  }
-
-  func showImagePicker() {
-    self.showSheet = true
-  }
 
   var body: some View {
     VStack {
-      Text("Friendly Chat")
-        .frame(width: 375, height: 30, alignment: .topLeading)
-        .font(.system(size: 28))
-        .padding()
-        .background(Color.orange)
-        .foregroundColor(Color.white)
+      HeaderView()
       List(messages) {
         FriendlyMessageView(friendlyMessage: $0)
           .listRowSeparator(.hidden)
           .padding(.vertical)
       }
         .listStyle(.plain)
-      Group {
-        HStack {
-          Button(action: showImagePicker) {
-            Image(systemName: "square.and.arrow.up")
-              .font(.system(size: 30.0))
-          }
-            .onTapGesture {
-              showSheet = true
-            }
-          TextField(
-            "Say something...",
-            text: $newMessageText
-          )
-            .padding()
-            .background(Color.white)
-          if (newMessageText != "") {
-            Button(action: presentDialog) {
-              Image(systemName: "paperplane")
-                .font(.system(size: 30.0))
-            }
-          } else {
-            Image(systemName: "paperplane")
-              .font(.system(size: 30.0))
-          }
-        }
-          .padding()
-      }
-        .background(Color.gray)
-        .ignoresSafeArea()
-    }
-      .alert("Sending Friendly Chat! (this doesn't do anything)",
-        isPresented: $isPresentingAlert) {
-      }
-      .sheet(isPresented: $showSheet) {
-        ImagePicker(selectedImage: self.$image)
+      FooterView(newMessageText: newMessageText)
     }
   }
 }

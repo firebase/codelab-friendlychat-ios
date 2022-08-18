@@ -1,5 +1,5 @@
 //
-//  FriendlyChatSwiftUIApp.swift
+//  FriendlyMessageImageView.swift
 //  FriendlyChatSwiftUI
 //
 //  Copyright (c) 2022 Google Inc.
@@ -19,11 +19,17 @@
 
 import SwiftUI
 
-@main
-struct FriendlyChatSwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+struct FriendlyMessageImageView: View {
+  var url: URL
+
+  var body: some View {
+    AsyncImage(url: url) { image in
+      image
+        .resizable()
+        .scaledToFill()
+    } placeholder: {
+      Image(systemName: "photo")
     }
+    .frame(maxWidth: 150, alignment: .leading)
+  }
 }

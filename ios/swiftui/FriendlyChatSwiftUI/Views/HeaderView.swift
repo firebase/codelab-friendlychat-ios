@@ -1,5 +1,5 @@
 //
-//  FriendlyChatSwiftUIApp.swift
+//  HeaderView.swift
 //  FriendlyChatSwiftUI
 //
 //  Copyright (c) 2022 Google Inc.
@@ -19,11 +19,14 @@
 
 import SwiftUI
 
-@main
-struct FriendlyChatSwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+struct HeaderView: View {
+  var body: some View {
+    Text("Friendly Chat")
+      .fontWeight(.bold)
+      .frame(width: 375, height: 30, alignment: .topLeading)
+      .font(.title)
+      .padding()
+      .background(Color("FirebaseOrange"))
+      .foregroundColor(Color.white)
+  }
 }

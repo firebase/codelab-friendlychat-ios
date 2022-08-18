@@ -1,5 +1,5 @@
 //
-//  FriendlyChatSwiftUIApp.swift
+//  InitialsView.swift
 //  FriendlyChatSwiftUI
 //
 //  Copyright (c) 2022 Google Inc.
@@ -19,11 +19,15 @@
 
 import SwiftUI
 
-@main
-struct FriendlyChatSwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+struct InitialsView: View {
+  var name: String
+
+  var body: some View {
+    ZStack(alignment: .center) {
+      Circle()
+        .frame(width: 45, height: 45)
+        .foregroundColor(Color("FirebaseYellow"))
+      Text(name.prefix(1))
     }
+  }
 }

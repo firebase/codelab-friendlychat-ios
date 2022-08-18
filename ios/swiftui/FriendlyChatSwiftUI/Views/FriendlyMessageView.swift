@@ -2,53 +2,43 @@
 //  FriendlyMessageView.swift
 //  FriendlyChatSwiftUI
 //
-//  Created by Rachel Collins on 8/17/22.
+//  Copyright (c) 2022 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 import SwiftUI
 
 struct FriendlyMessageView: View {
   var friendlyMessage: FriendlyMessage
-  let currentUserName = "Name 1"
+  // TODO: replace with current Auth information when Firebase Auth added
+  let currentUserName = "Dash"
 
   var body: some View {
     HStack {
       if (friendlyMessage.name != nil) {
-        ZStack(alignment: .center) {
-          Circle()
-            .frame(width: 45, height: 45)
-            .foregroundColor(Color.yellow)
-          Text(friendlyMessage.name!.prefix(1))
-        }
+        InitialsView(name: friendlyMessage.name!)
       } else {
         Image(systemName: "person.crop.circle")
           .font(.system(size: 45.0))
       }
       VStack(alignment: .leading) {
         if (friendlyMessage.imageUrl != nil) {
-          AsyncImage(url: friendlyMessage.imageUrl!) { image in
-            image
-              .resizable()
-              .scaledToFill()
-          } placeholder: {
-            Image(systemName: "photo")
-          }
-          .frame(maxWidth: 150, alignment: .leading)
+          FriendlyMessageImageView(url: friendlyMessage.imageUrl!)
         }
         else {
           ZStack {
-            if (friendlyMessage.name == currentUserName) {
-              Image("blueRectangle")
-                  .resizable()
-                  .clipShape(RoundedRectangle(cornerRadius: 25))
-            } else {
-              Image("grayRectangle")
-                  .resizable()
-                  .clipShape(RoundedRectangle(cornerRadius: 25))
-            }
-            Text(friendlyMessage.text!)
-              .padding()
-              .layoutPriority(1)
+           FriendlyMessageTextView(text: friendlyMessage.text!, isUserText: friendlyMessage.name == currentUserName)
           }
         }
         if (friendlyMessage.name != nil) {
