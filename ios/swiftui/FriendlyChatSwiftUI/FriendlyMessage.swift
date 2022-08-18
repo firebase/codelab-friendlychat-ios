@@ -9,8 +9,7 @@ import Foundation
 
 struct FriendlyMessage: Identifiable {
   let id = UUID()
-  let text: String
-  let name: String
-  let photoUrl: String
-  let imageUrl: String
+  let text: String?
+  let name: String?
+  let imageUrl: URL?
 }
