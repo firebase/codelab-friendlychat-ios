@@ -1,9 +1,9 @@
 PODS:
-  - AppAuth (1.5.0):
-    - AppAuth/Core (= 1.5.0)
-    - AppAuth/ExternalUserAgent (= 1.5.0)
-  - AppAuth/Core (1.5.0)
-  - AppAuth/ExternalUserAgent (1.5.0):
+  - AppAuth (1.6.0):
+    - AppAuth/Core (= 1.6.0)
+    - AppAuth/ExternalUserAgent (= 1.6.0)
+  - AppAuth/Core (1.6.0)
+  - AppAuth/ExternalUserAgent (1.6.0):
     - AppAuth/Core
   - Firebase/Auth (6.15.0):
     - Firebase/CoreOnly
@@ -195,7 +195,7 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
-  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
+  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   Firebase: 5d77105d9740a07ca6b16927ca971db7e860faaf
   FirebaseABTesting: 821a3a3e4a145987e80fee3657c4de1cb9adf693
   FirebaseAnalytics: e83e64b1231dedcd9ddd4bdecd9bcfd6ba341679
