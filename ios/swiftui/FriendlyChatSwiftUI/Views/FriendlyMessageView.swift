@@ -58,6 +58,7 @@ struct FriendlyMessageView: View {
 
 struct FriendlyMessageView_Previews: PreviewProvider {
     static let friendlyMessagePreview = FriendlyMessage(
+      id: "1234",
       text: "Text preview",
       name: "name preview",
       imageUrl: URL(string: "https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png")

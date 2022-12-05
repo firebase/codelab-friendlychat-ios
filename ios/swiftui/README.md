@@ -9,7 +9,7 @@ So far it contains: basic UI elements and styling:
 As well as a LogIn screen and a SignUp screen with Firebase Authentication.
 
 Future PRs:
-1. Adding Firebase Firestore, Storage
+1. Adding Firebase Realtime Database, Storage
 1. Re-writing codelab to include latest updates + emulators
 1. Removing the current version of this codelab (currently in the swift folder) and replacing it with this version
 
