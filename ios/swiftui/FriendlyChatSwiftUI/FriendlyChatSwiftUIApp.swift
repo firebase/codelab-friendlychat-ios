@@ -18,12 +18,17 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct FriendlyChatSwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  init() {
+    FirebaseApp.configure()
+  }
+
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
     }
+  }
 }

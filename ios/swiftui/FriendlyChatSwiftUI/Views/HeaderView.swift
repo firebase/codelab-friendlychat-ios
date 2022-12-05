@@ -27,6 +27,6 @@ struct HeaderView: View {
       .font(.title)
       .padding()
       .background(Color("FirebaseOrange"))
-      .foregroundColor(Color.white)
+      .foregroundColor(.white)
   }
 }

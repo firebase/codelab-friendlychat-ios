@@ -42,12 +42,12 @@ struct ImagePicker: UIViewControllerRepresentable {
     var parent: ImagePicker
 
     init(_ parent: ImagePicker) {
-        self.parent = parent
+      self.parent = parent
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
       if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-          parent.selectedImage = image
+        parent.selectedImage = image
 
         // TODO: upload image via reference to self.image
       }
