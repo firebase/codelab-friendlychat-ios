@@ -22,8 +22,7 @@
 		8EDCBB65293805E800C1D4EB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCBB64293805E800C1D4EB /* LoginView.swift */; };
 		8EDCBB672938064E00C1D4EB /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCBB662938064E00C1D4EB /* UserViewModel.swift */; };
 		8EDCBB692938077B00C1D4EB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCBB682938077B00C1D4EB /* SignUpView.swift */; };
-		8EDCBB6D293E8B9100C1D4EB /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCBB6C293E8B9100C1D4EB /* MessageViewModel.swift */; };
-		8EDCBB6F293E8E8500C1D4EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCBB6E293E8E8500C1D4EB /* GoogleService-Info.plist */; };
+		8EDCBB6D293E8B9100C1D4EB /* FriendlyMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCBB6C293E8B9100C1D4EB /* FriendlyMessageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,8 +42,7 @@
 		8EDCBB64293805E800C1D4EB /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8EDCBB662938064E00C1D4EB /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		8EDCBB682938077B00C1D4EB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		8EDCBB6C293E8B9100C1D4EB /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
-		8EDCBB6E293E8E8500C1D4EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8EDCBB6C293E8B9100C1D4EB /* FriendlyMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyMessageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,13 +85,12 @@
 			children = (
 				8EDCBB62293805CC00C1D4EB /* FriendlyMessage.swift */,
 				8EDCBB662938064E00C1D4EB /* UserViewModel.swift */,
+				8EDCBB6C293E8B9100C1D4EB /* FriendlyMessageViewModel.swift */,
 				8ED5066128AEE2680031A996 /* Views */,
 				8ED5064D28ADA0C70031A996 /* FriendlyChatSwiftUIApp.swift */,
 				8ED5065128ADA0C90031A996 /* Assets.xcassets */,
 				8ED5065328ADA0C90031A996 /* Preview Content */,
 				8ED5065F28ADF2F50031A996 /* ImagePicker.swift */,
-				8EDCBB6E293E8E8500C1D4EB /* GoogleService-Info.plist */,
-				8EDCBB6C293E8B9100C1D4EB /* MessageViewModel.swift */,
 			);
 			path = FriendlyChatSwiftUI;
 			sourceTree = "<group>";
@@ -181,7 +178,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ED5065528ADA0C90031A996 /* Preview Assets.xcassets in Resources */,
-				8EDCBB6F293E8E8500C1D4EB /* GoogleService-Info.plist in Resources */,
 				8ED5065228ADA0C90031A996 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +193,7 @@
 				8EDCBB672938064E00C1D4EB /* UserViewModel.swift in Sources */,
 				8ED5066728AEE5080031A996 /* FriendlyMessageTextView.swift in Sources */,
 				8ED5066928AEE6600031A996 /* HeaderView.swift in Sources */,
-				8EDCBB6D293E8B9100C1D4EB /* MessageViewModel.swift in Sources */,
+				8EDCBB6D293E8B9100C1D4EB /* FriendlyMessageViewModel.swift in Sources */,
 				8ED5065E28ADAD770031A996 /* FriendlyMessageView.swift in Sources */,
 				8ED5066028ADF2F50031A996 /* ImagePicker.swift in Sources */,
 				8ED5066528AEE4830031A996 /* FriendlyMessageImageView.swift in Sources */,

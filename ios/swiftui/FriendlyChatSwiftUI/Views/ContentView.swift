@@ -22,7 +22,7 @@ import SwiftUI
 struct ContentView: View {
   @AppStorage("isSignedIn") var isSignedIn = false
   @State private var newMessageText = ""
-  @StateObject private var friendlyMessageVM = MessageViewModel()
+  @StateObject private var friendlyMessageVM = FriendlyMessageViewModel()
 
   var body: some View {
     if isSignedIn {

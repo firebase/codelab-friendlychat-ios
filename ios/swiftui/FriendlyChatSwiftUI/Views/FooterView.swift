@@ -16,19 +16,23 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-
+import FirebaseDatabase
 import SwiftUI
 
 struct FooterView: View {
   @State var newMessageText: String
-  @State private var isPresentingAlert: Bool = false
   @State private var image = UIImage()
   @State private var showSheet = false
+  var ref = Database.database().reference()
 
-  func presentDialog() {
+  func sendMessage() {
     if (newMessageText != "") {
-      isPresentingAlert = true
+      // sending text
+      self.ref.child("messages").childByAutoId().setValue(["text": newMessageText])
       newMessageText = ""
+    } else {
+      // sending image
+      // TODO: upload image to storage for message
     }
   }
 
@@ -53,7 +57,7 @@ struct FooterView: View {
           .padding()
           .background(Color.white)
         if (newMessageText != "") {
-          Button(action: presentDialog) {
+          Button(action: sendMessage) {
             Image(systemName: "paperplane")
               .font(.system(size: 30.0))
           }
@@ -65,9 +69,6 @@ struct FooterView: View {
         .padding()
     }
       .background(Color("FirebaseGray"))
-      .alert("Sending Friendly Chat! (this doesn't do anything)",
-        isPresented: $isPresentingAlert) {
-      }
       .sheet(isPresented: $showSheet) {
         ImagePicker(selectedImage: self.$image)
       }

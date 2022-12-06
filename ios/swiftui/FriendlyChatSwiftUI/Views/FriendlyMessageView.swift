@@ -17,12 +17,12 @@
 //  limitations under the License.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct FriendlyMessageView: View {
   var friendlyMessage: FriendlyMessage
-  // TODO: replace with current Auth information when Firebase Auth added
-  let currentUserName = "Dash"
+  let currentUserName = Auth.auth().currentUser?.displayName
 
   var body: some View {
     HStack {
