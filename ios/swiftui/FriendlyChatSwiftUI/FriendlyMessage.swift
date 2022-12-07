@@ -19,8 +19,8 @@
 
 import Foundation
 
-struct FriendlyMessage: Identifiable {
-  let id = UUID()
+struct FriendlyMessage: Identifiable, Codable {
+  var id: String
   let text: String?
   let name: String?
   let imageUrl: URL?

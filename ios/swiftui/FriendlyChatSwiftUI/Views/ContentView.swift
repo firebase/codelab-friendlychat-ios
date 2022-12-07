@@ -22,13 +22,7 @@ import SwiftUI
 struct ContentView: View {
   @AppStorage("isSignedIn") var isSignedIn = false
   @State private var newMessageText = ""
-
-  // TODO: replace with database messages when Firebase Firestore is connected
-  private var messages = [
-    FriendlyMessage(text: "What's the Firebase logo?", name: "Dash", imageUrl: nil),
-    FriendlyMessage(text: "Sparky has an image!", name: nil, imageUrl: nil),
-    FriendlyMessage(text: nil, name: "Sparky", imageUrl: URL(string: "https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png"))
-  ]
+  @StateObject private var friendlyMessageVM = FriendlyMessageViewModel()
 
   var body: some View {
     if isSignedIn {
@@ -39,14 +33,20 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, alignment: .topTrailing)
         }
           .padding(.horizontal)
-        List(messages) {
-          FriendlyMessageView(friendlyMessage: $0)
+        List(friendlyMessageVM.messages) { message in
+          FriendlyMessageView(friendlyMessage: message)
             .listRowSeparator(.hidden)
             .padding(.vertical)
         }
           .listStyle(.plain)
         FooterView(newMessageText: newMessageText)
       }
+        .onAppear {
+          friendlyMessageVM.listen()
+        }
+        .onDisappear {
+          friendlyMessageVM.stopListen()
+        }
     } else {
       LoginView()
     }
