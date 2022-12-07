@@ -49,7 +49,7 @@ struct ImagePicker: UIViewControllerRepresentable {
       if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
         parent.selectedImage = image
 
-        // TODO: upload image via reference to self.image
+        ImageUploader().uploadImage(image: image)
       }
 
       parent.presentationMode.wrappedValue.dismiss()

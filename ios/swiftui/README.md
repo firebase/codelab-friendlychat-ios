@@ -10,9 +10,9 @@ So far it contains:
 
 2. LogIn screen and a SignUp screen with Firebase Authentication.
 3. Read/write messages to Firebase Realtime DB
+4. Read/write images to Firebase Storage and references in Realtime DB
 
 Future PRs:
-1. Adding Firebase Storage
 1. Fixing bugs (such as the color of message when Auth'd user's display name is nil and scroll to bottom on message send)
 1. Re-writing codelab to include latest updates + emulators
 1. Removing the current version of this codelab (currently in the swift folder) and replacing it with this version

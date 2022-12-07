@@ -24,6 +24,7 @@ struct FriendlyMessageView: View {
   var friendlyMessage: FriendlyMessage
   let currentUserName = Auth.auth().currentUser?.displayName
 
+
   var body: some View {
     HStack {
       if (friendlyMessage.name != nil) {
@@ -34,7 +35,7 @@ struct FriendlyMessageView: View {
       }
       VStack(alignment: .leading) {
         if (friendlyMessage.imageUrl != nil) {
-          FriendlyMessageImageView(url: friendlyMessage.imageUrl!)
+          FriendlyMessageImageView(fullPath: friendlyMessage.imageUrl!)
         }
         else {
           ZStack {
@@ -61,7 +62,7 @@ struct FriendlyMessageView_Previews: PreviewProvider {
       id: "1234",
       text: "Text preview",
       name: "name preview",
-      imageUrl: URL(string: "https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png")
+      imageUrl: nil
     )
 
     static var previews: some View {
