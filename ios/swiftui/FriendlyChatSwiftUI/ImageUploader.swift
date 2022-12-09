@@ -1,5 +1,5 @@
 //
-//  FriendlyMessageImageView.swift
+//  ImageUploader.swift
 //  FriendlyChatSwiftUI
 //
 //  Copyright (c) 2022 Google Inc.
@@ -19,28 +19,28 @@
 
 import SwiftUI
 import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
-struct FriendlyMessageImageView: View {
-  let fullPath: String
+class ImageUploader: ObservableObject {
   let storage = Storage.storage()
-  @State private var image = UIImage(systemName: "photo")
+  let user = Auth.auth().currentUser
+  let db = Database.database()
 
-  func downloadImage() {
-    let storageRef = storage.reference(withPath: fullPath)
-    storageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
-      if let error = error {
-        print("Error downloading image: \(error)")
-      } else {
-        self.image = UIImage(data: data!)
+  func uploadImage(image: UIImage) {
+    let storageRef = storage.reference().child(user!.uid).child("images").child(image.description)
+    let imageData = image.jpegData(compressionQuality: 0.5)
+    let dbRef = db.reference()
+
+    // Upload the file and send as message to db
+    if let imageData = imageData {
+      storageRef.putData(imageData, metadata: nil).observe(.success) { snapshot in
+        // Upload completed successfully
+        dbRef.child("messages").childByAutoId().setValue(["imageUrl": storageRef.fullPath])
       }
     }
   }
-
-  var body: some View {
-    Image(uiImage: self.image!)
-        .resizable()
-        .scaledToFill()
-    .frame(maxWidth: 150, alignment: .leading)
-    .onAppear(perform: downloadImage)
-  }
 }
+
+
+

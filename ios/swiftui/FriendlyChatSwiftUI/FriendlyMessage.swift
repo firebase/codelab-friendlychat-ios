@@ -23,5 +23,5 @@ struct FriendlyMessage: Identifiable, Codable {
   var id: String
   let text: String?
   let name: String?
-  let imageUrl: URL?
+  let imageUrl: String?
 }
