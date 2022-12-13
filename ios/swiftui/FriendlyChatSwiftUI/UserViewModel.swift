@@ -24,6 +24,7 @@ class UserViewModel: ObservableObject {
   @AppStorage("isSignedIn") var isSignedIn = false
   @Published var email = ""
   @Published var password = ""
+  @Published var displayName = ""
   @Published var alert = false
   @Published var alertMessage = ""
 
@@ -38,7 +39,7 @@ class UserViewModel: ObservableObject {
       showAlertMessage(message: "Neither email nor password can be empty.")
       return
     }
-    // sign in with email and password
+    // Sign in with email and password
     Auth.auth().signIn(withEmail: email, password: password) { result, err in
       if let err = err {
         self.alertMessage = err.localizedDescription
@@ -50,18 +51,34 @@ class UserViewModel: ObservableObject {
   }
 
   func signUp() {
-    // check if all fields are inputted correctly
+    // Check if all fields are inputted correctly
     if email.isEmpty || password.isEmpty {
       showAlertMessage(message: "Neither email nor password can be empty.")
       return
     }
-    // sign up with email and password
+    // Sign up with email and password
     Auth.auth().createUser(withEmail: email, password: password) { result, err in
       if let err = err {
         self.alertMessage = err.localizedDescription
         self.alert.toggle()
       } else {
         self.login()
+      }
+    }
+  }
+
+  func updateDisplayName() {
+    print("signing up user and setting display name to: \(self.displayName)")
+    // On creation of new user, set display name
+    let changeRequest = Auth.auth().currentUser!.createProfileChangeRequest()
+    changeRequest.displayName = self.displayName
+    changeRequest.commitChanges { error in
+      if let error = error {
+        print("got some sort of error in display name")
+        self.alertMessage = error.localizedDescription
+        self.alert.toggle()
+      } else {
+        print("display was supposedly a success...")
       }
     }
   }

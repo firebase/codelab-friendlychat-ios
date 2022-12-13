@@ -24,11 +24,10 @@ struct FriendlyMessageView: View {
   var friendlyMessage: FriendlyMessage
   let currentUserName = Auth.auth().currentUser?.displayName
 
-
   var body: some View {
     HStack {
-      if (friendlyMessage.name != nil) {
-        InitialsView(name: friendlyMessage.name!)
+      if (friendlyMessage.displayName != nil) {
+        InitialsView(name: friendlyMessage.displayName!)
       } else {
         Image(systemName: "person.crop.circle")
           .font(.system(size: 45.0))
@@ -39,11 +38,11 @@ struct FriendlyMessageView: View {
         }
         else {
           ZStack {
-           FriendlyMessageTextView(text: friendlyMessage.text!, isUserText: friendlyMessage.name == currentUserName)
+            FriendlyMessageTextView(text: friendlyMessage.text!, isUserText: friendlyMessage.displayName == currentUserName && friendlyMessage.displayName != nil)
           }
         }
-        if (friendlyMessage.name != nil) {
-          Text(friendlyMessage.name!)
+        if (friendlyMessage.displayName != nil && friendlyMessage.displayName != "") {
+          Text(friendlyMessage.displayName!)
             .foregroundColor(Color.gray)
             .frame(maxWidth: .infinity, alignment: .leading)
         } else {
@@ -53,7 +52,6 @@ struct FriendlyMessageView: View {
         }
       }
     }
-
   }
 }
 
@@ -61,7 +59,7 @@ struct FriendlyMessageView_Previews: PreviewProvider {
     static let friendlyMessagePreview = FriendlyMessage(
       id: "1234",
       text: "Text preview",
-      name: "name preview",
+      displayName: "name preview",
       imageUrl: nil
     )
 
