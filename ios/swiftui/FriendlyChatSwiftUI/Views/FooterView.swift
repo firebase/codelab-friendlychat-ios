@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+import FirebaseAuth
 import FirebaseDatabase
 import SwiftUI
 
@@ -28,11 +29,8 @@ struct FooterView: View {
   func sendMessage() {
     if (newMessageText != "") {
       // sending text
-      self.ref.child("messages").childByAutoId().setValue(["text": newMessageText])
+      self.ref.child("messages").childByAutoId().setValue(["text": newMessageText, "displayName": Auth.auth().currentUser!.displayName])
       newMessageText = ""
-    } else {
-      // sending image
-      // TODO: upload image to storage for message
     }
   }
 

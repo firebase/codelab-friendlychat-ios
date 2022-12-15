@@ -22,6 +22,6 @@ import Foundation
 struct FriendlyMessage: Identifiable, Codable {
   var id: String
   let text: String?
-  let name: String?
+  let displayName: String?
   let imageUrl: String?
 }

@@ -36,7 +36,7 @@ class ImageUploader: ObservableObject {
     if let imageData = imageData {
       storageRef.putData(imageData, metadata: nil).observe(.success) { snapshot in
         // Upload completed successfully
-        dbRef.child("messages").childByAutoId().setValue(["imageUrl": storageRef.fullPath])
+        dbRef.child("messages").childByAutoId().setValue(["imageUrl": storageRef.fullPath, "displayName": Auth.auth().currentUser!.displayName])
       }
     }
   }

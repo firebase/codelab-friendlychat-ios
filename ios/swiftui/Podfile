@@ -6,7 +6,6 @@ platform :ios, '9.0'
 pod 'FirebaseAuth'
 pod 'FirebaseDatabase'
 pod 'FirebaseStorage'
-pod 'GoogleSignIn'
 
 target 'FriendlyChatSwiftUI' do
 end

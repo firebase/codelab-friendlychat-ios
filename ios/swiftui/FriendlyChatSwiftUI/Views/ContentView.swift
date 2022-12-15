@@ -23,22 +23,41 @@ struct ContentView: View {
   @AppStorage("isSignedIn") var isSignedIn = false
   @State private var newMessageText = ""
   @StateObject private var friendlyMessageVM = FriendlyMessageViewModel()
+  @State private var profileViewPresented = false
 
   var body: some View {
     if isSignedIn {
       VStack {
         HeaderView()
-        Button(action:user.logout) {
-          Text("Logout")
-            .frame(maxWidth: .infinity, alignment: .topTrailing)
+        Menu {
+          Button("Profile", action: {
+            profileViewPresented = true
+          })
+          Button("Logout", action: user.logout)
+        } label: {
+          Image(systemName: "list.bullet.circle.fill")
+            .font(.system(size: 30.0))
         }
-          .padding(.horizontal)
-        List(friendlyMessageVM.messages) { message in
-          FriendlyMessageView(friendlyMessage: message)
-            .listRowSeparator(.hidden)
-            .padding(.vertical)
+        .frame(maxWidth: .infinity, alignment: .topTrailing)
+        .padding(.horizontal)
+        .sheet(isPresented: $profileViewPresented) {
+          ProfileView(isPresented: $profileViewPresented, user: user)
         }
-          .listStyle(.plain)
+        ScrollViewReader { scrollViewReader in
+          ScrollView {
+            ForEach(0..<friendlyMessageVM.messages.count, id: \.self) { i in
+              FriendlyMessageView(friendlyMessage: friendlyMessageVM.messages[i])
+                .id(i)
+                .listRowSeparator(.hidden)
+                .padding(.vertical)
+            }
+            .onChange(of: friendlyMessageVM.messages.count) { _ in
+              withAnimation(.easeInOut) {
+                scrollViewReader.scrollTo(friendlyMessageVM.messages.count - 1)
+              }
+            }
+          }
+        }
         FooterView(newMessageText: newMessageText)
       }
         .onAppear {
