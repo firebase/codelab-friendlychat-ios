@@ -18,13 +18,17 @@
 //
 
 import SwiftUI
+import Observation
 import FirebaseAuth
 import FirebaseDatabase
 
 @MainActor
-class FriendlyMessageViewModel: ObservableObject {
-  @Published var messages: [FriendlyMessage] = []
+@Observable
+final class FriendlyMessageViewModel {
+  var messages: [FriendlyMessage] = []
+  @ObservationIgnored
   private let dbRef = Database.database().reference().child("messages")
+  @ObservationIgnored
   private var refHandle: DatabaseHandle?
 
   func startListening() {

@@ -45,7 +45,7 @@ struct FriendlyMessageView: View {
         } else {
           Image(systemName: "person.crop.circle.fill")
             .font(.system(size: 42))
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
         }
       } else {
         Spacer()
@@ -60,7 +60,7 @@ struct FriendlyMessageView: View {
 
         Text(friendlyMessage.displayName ?? "Anonymous")
           .font(.caption)
-          .foregroundColor(.gray)
+          .foregroundStyle(.gray)
       }
 
       if isCurrentUserMessage {
@@ -69,7 +69,7 @@ struct FriendlyMessageView: View {
         } else {
           Image(systemName: "person.crop.circle.fill")
             .font(.system(size: 42))
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
         }
       } else {
         Spacer()
@@ -78,8 +78,6 @@ struct FriendlyMessageView: View {
   }
 }
 
-struct FriendlyMessageView_Previews: PreviewProvider {
-  static var previews: some View {
-    FriendlyMessageView(friendlyMessage: FriendlyMessage(id: "1", text: "Hello world", displayName: "Google", imageUrl: nil))
-  }
+#Preview {
+  FriendlyMessageView(friendlyMessage: FriendlyMessage(id: "1", text: "Hello world", displayName: "Google", imageUrl: nil))
 }

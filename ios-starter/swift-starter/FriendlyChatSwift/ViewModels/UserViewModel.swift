@@ -18,14 +18,17 @@
 //
 
 import SwiftUI
+import Observation
 import FirebaseAuth
 
 @MainActor
-class UserViewModel: ObservableObject {
-  @Published var user: User?
-  @Published var errorMessage: String?
-  @Published var showAlert = false
+@Observable
+final class UserViewModel {
+  var user: User?
+  var errorMessage: String?
+  var showAlert = false
 
+  @ObservationIgnored
   private var authStateHandle: AuthStateDidChangeListenerHandle?
 
   init() {

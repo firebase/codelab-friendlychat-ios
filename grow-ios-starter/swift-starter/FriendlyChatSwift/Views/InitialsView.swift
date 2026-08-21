@@ -26,17 +26,15 @@ struct InitialsView: View {
     ZStack(alignment: .center) {
       Circle()
         .frame(width: 45, height: 45)
-        .foregroundColor(Color("FirebaseYellow"))
+        .foregroundStyle(Color("FirebaseYellow"))
       Text(name.prefix(1).uppercased())
         .font(.headline)
         .fontWeight(.bold)
-        .foregroundColor(.black)
+        .foregroundStyle(.black)
     }
   }
 }
 
-struct InitialsView_Previews: PreviewProvider {
-  static var previews: some View {
-    InitialsView(name: "Google")
-  }
+#Preview {
+  InitialsView(name: "Google")
 }

@@ -22,19 +22,19 @@ import FirebaseAuth
 
 struct ProfileView: View {
   @Binding var isPresented: Bool
-  @ObservedObject var userViewModel: UserViewModel
+  var userViewModel: UserViewModel
   @State private var displayName = Auth.auth().currentUser?.displayName ?? ""
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack(spacing: 24) {
         VStack(spacing: 8) {
           Image(systemName: "person.circle.fill")
             .font(.system(size: 80))
-            .foregroundColor(Color("FirebaseOrange"))
+            .foregroundStyle(Color("FirebaseOrange"))
           Text(Auth.auth().currentUser?.email ?? "User Profile")
             .font(.subheadline)
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
         }
         .padding(.top, 32)
 
@@ -42,17 +42,17 @@ struct ProfileView: View {
           Text("DISPLAY NAME")
             .font(.caption)
             .fontWeight(.semibold)
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
 
           HStack {
             Image(systemName: "person.fill")
-              .foregroundColor(.gray)
+              .foregroundStyle(.gray)
             TextField("Display Name", text: $displayName)
               .autocorrectionDisabled()
           }
           .padding()
           .background(Color(.systemGray6))
-          .cornerRadius(10)
+          .clipShape(.rect(cornerRadius: 10))
         }
         .padding(.horizontal, 32)
 
@@ -64,11 +64,11 @@ struct ProfileView: View {
         }) {
           Text("UPDATE PROFILE")
             .font(.headline)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
             .padding()
             .frame(maxWidth: .infinity)
             .background(Color("FirebaseOrange"))
-            .cornerRadius(25)
+            .clipShape(Capsule())
         }
         .padding(.horizontal, 32)
 
@@ -77,7 +77,7 @@ struct ProfileView: View {
       .navigationTitle("Profile")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           Button("Done") {
             isPresented = false
           }
@@ -87,8 +87,6 @@ struct ProfileView: View {
   }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-  static var previews: some View {
-    ProfileView(isPresented: .constant(true), userViewModel: UserViewModel())
-  }
+#Preview {
+  ProfileView(isPresented: .constant(true), userViewModel: UserViewModel())
 }

@@ -32,20 +32,20 @@ struct FriendlyMessageImageView: View {
           .resizable()
           .scaledToFill()
           .frame(maxWidth: 200, maxHeight: 200)
-          .cornerRadius(12)
+          .clipShape(.rect(cornerRadius: 12))
           .clipped()
       } else if isLoading {
         ProgressView()
           .frame(width: 120, height: 120)
           .background(Color("FirebaseGray"))
-          .cornerRadius(12)
+          .clipShape(.rect(cornerRadius: 12))
       } else {
         Image(systemName: "photo")
           .font(.system(size: 32))
-          .foregroundColor(.gray)
+          .foregroundStyle(.gray)
           .frame(width: 120, height: 120)
           .background(Color("FirebaseGray"))
-          .cornerRadius(12)
+          .clipShape(.rect(cornerRadius: 12))
       }
     }
     .task {
@@ -74,4 +74,8 @@ struct FriendlyMessageImageView: View {
       }
     }
   }
+}
+
+#Preview {
+  FriendlyMessageImageView(imageUrl: "https://example.com/image.jpg")
 }

@@ -20,7 +20,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-  @ObservedObject var userViewModel: UserViewModel
+  @Bindable var userViewModel: UserViewModel
   @Binding var isPresented: Bool
 
   @State private var email = ""
@@ -32,23 +32,23 @@ struct SignUpView: View {
       Text("CREATE ACCOUNT")
         .font(.title2)
         .fontWeight(.bold)
-        .foregroundColor(Color("FirebaseOrange"))
+        .foregroundStyle(Color("FirebaseOrange"))
         .padding(.top, 24)
 
       VStack(spacing: 16) {
         HStack {
           Image(systemName: "person.fill")
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
           TextField("Display Name", text: $displayName)
             .autocorrectionDisabled()
         }
         .padding()
         .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .clipShape(.rect(cornerRadius: 10))
 
         HStack {
           Image(systemName: "envelope.fill")
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
           TextField("Email", text: $email)
             .keyboardType(.emailAddress)
             .textInputAutocapitalization(.never)
@@ -56,16 +56,16 @@ struct SignUpView: View {
         }
         .padding()
         .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .clipShape(.rect(cornerRadius: 10))
 
         HStack {
           Image(systemName: "lock.fill")
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
           SecureField("Password", text: $password)
         }
         .padding()
         .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .clipShape(.rect(cornerRadius: 10))
       }
       .padding(.horizontal, 32)
 
@@ -79,11 +79,11 @@ struct SignUpView: View {
       }) {
         Text("SIGN UP")
           .font(.headline)
-          .foregroundColor(.white)
+          .foregroundStyle(.white)
           .padding()
           .frame(maxWidth: .infinity)
           .background(Color("FirebaseOrange"))
-          .cornerRadius(25)
+          .clipShape(Capsule())
       }
       .padding(.horizontal, 32)
 
@@ -93,23 +93,19 @@ struct SignUpView: View {
           isPresented = false
         }
         .fontWeight(.bold)
-        .foregroundColor(Color("FirebaseOrange"))
+        .foregroundStyle(Color("FirebaseOrange"))
       }
 
       Spacer()
     }
-    .alert(isPresented: $userViewModel.showAlert) {
-      Alert(
-        title: Text("Notice"),
-        message: Text(userViewModel.errorMessage ?? ""),
-        dismissButton: .default(Text("OK"))
-      )
+    .alert("Notice", isPresented: $userViewModel.showAlert) {
+      Button("OK", role: .cancel) { }
+    } message: {
+      Text(userViewModel.errorMessage ?? "")
     }
   }
 }
 
-struct SignUpView_Previews: PreviewProvider {
-  static var previews: some View {
-    SignUpView(userViewModel: UserViewModel(), isPresented: .constant(true))
-  }
+#Preview {
+  SignUpView(userViewModel: UserViewModel(), isPresented: .constant(true))
 }

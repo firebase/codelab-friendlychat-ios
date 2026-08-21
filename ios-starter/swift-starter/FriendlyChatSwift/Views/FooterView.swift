@@ -26,7 +26,7 @@ struct FooterView: View {
   @State private var selectedItem: PhotosPickerItem?
   @State private var messageText = ""
   @State private var isUploading = false
-  @ObservedObject var viewModel: FriendlyMessageViewModel
+  var viewModel: FriendlyMessageViewModel
 
   var body: some View {
     HStack(spacing: 12) {
@@ -37,9 +37,10 @@ struct FooterView: View {
         PhotosPicker(selection: $selectedItem, matching: .images) {
           Image(systemName: "photo.on.rectangle.angled")
             .font(.system(size: 26))
-            .foregroundColor(.blue)
+            .foregroundStyle(.blue)
+            .accessibilityLabel("Select photo")
         }
-        .onChange(of: selectedItem) { newItem in
+        .onChange(of: selectedItem) { _, newItem in
           Task {
             if let data = try? await newItem?.loadTransferable(type: Data.self) {
               await uploadAndSendImage(data: data)
@@ -51,14 +52,14 @@ struct FooterView: View {
       TextField("Say something...", text: $messageText)
         .padding(10)
         .background(Color.white)
-        .cornerRadius(20)
+        .clipShape(.rect(cornerRadius: 20))
 
-      Button(action: sendMessage) {
-        Image(systemName: "paperplane.fill")
-          .font(.system(size: 24))
-          .foregroundColor(messageText.isEmpty ? .gray : .blue)
-      }
-      .disabled(messageText.isEmpty)
+      Button("Send", systemImage: "paperplane.fill", action: sendMessage)
+        .labelStyle(.iconOnly)
+        .font(.system(size: 24))
+        .foregroundStyle(messageText.isEmpty ? .gray : .blue)
+        .accessibilityLabel("Send message")
+        .disabled(messageText.isEmpty)
     }
     .padding()
     .background(Color("FirebaseGray"))
@@ -79,4 +80,8 @@ struct FooterView: View {
   private func uploadAndSendImage(data: Data) async {
     // TODO: Upload image data to Cloud Storage and send message with downloadURL
   }
+}
+
+#Preview {
+  FooterView(viewModel: FriendlyMessageViewModel())
 }

@@ -20,8 +20,8 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject private var userViewModel = UserViewModel()
-  @StateObject private var messageViewModel = FriendlyMessageViewModel()
+  @State private var userViewModel = UserViewModel()
+  @State private var messageViewModel = FriendlyMessageViewModel()
   @State private var profileViewPresented = false
 
   var body: some View {
@@ -39,7 +39,8 @@ struct ContentView: View {
           } label: {
             Image(systemName: "list.bullet.circle.fill")
               .font(.system(size: 28))
-              .foregroundColor(.blue)
+              .foregroundStyle(.blue)
+              .accessibilityLabel("User options")
           }
         }
         .padding(.horizontal)
@@ -51,17 +52,17 @@ struct ContentView: View {
         ScrollViewReader { scrollViewReader in
           ScrollView {
             LazyVStack(spacing: 12) {
-              ForEach(Array(messageViewModel.messages.enumerated()), id: \.element.id) { index, message in
+              ForEach(messageViewModel.messages) { message in
                 FriendlyMessageView(friendlyMessage: message)
-                  .id(index)
+                  .id(message.id)
               }
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
-            .onChange(of: messageViewModel.messages.count) { count in
-              guard count > 0 else { return }
+            .onChange(of: messageViewModel.messages.count) { _, count in
+              guard count > 0, let lastId = messageViewModel.messages.last?.id else { return }
               withAnimation(.easeInOut) {
-                scrollViewReader.scrollTo(count - 1, anchor: .bottom)
+                scrollViewReader.scrollTo(lastId, anchor: .bottom)
               }
             }
           }
@@ -81,8 +82,6 @@ struct ContentView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ContentView()
 }

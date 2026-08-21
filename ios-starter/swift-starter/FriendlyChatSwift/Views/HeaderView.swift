@@ -30,12 +30,10 @@ struct HeaderView: View {
     .padding()
     .frame(maxWidth: .infinity)
     .background(Color("FirebaseOrange"))
-    .foregroundColor(.white)
+    .foregroundStyle(.white)
   }
 }
 
-struct HeaderView_Previews: PreviewProvider {
-  static var previews: some View {
-    HeaderView()
-  }
+#Preview {
+  HeaderView()
 }

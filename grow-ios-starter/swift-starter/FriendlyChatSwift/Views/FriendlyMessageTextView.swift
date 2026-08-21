@@ -28,16 +28,14 @@ struct FriendlyMessageTextView: View {
       .padding(.horizontal, 16)
       .padding(.vertical, 10)
       .background(isUserText ? Color("FirebaseBlue") : Color("FirebaseGray"))
-      .foregroundColor(isUserText ? .white : .primary)
-      .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+      .foregroundStyle(isUserText ? .white : .primary)
+      .clipShape(.rect(cornerRadius: 18))
   }
 }
 
-struct FriendlyMessageTextView_Previews: PreviewProvider {
-  static var previews: some View {
-    VStack {
-      FriendlyMessageTextView(text: "Hello from current user!", isUserText: true)
-      FriendlyMessageTextView(text: "Hello from someone else!", isUserText: false)
-    }
+#Preview {
+  VStack {
+    FriendlyMessageTextView(text: "Hello from current user!", isUserText: true)
+    FriendlyMessageTextView(text: "Hello from someone else!", isUserText: false)
   }
 }

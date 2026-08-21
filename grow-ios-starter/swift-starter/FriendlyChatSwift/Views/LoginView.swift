@@ -20,7 +20,7 @@
 import SwiftUI
 
 struct LoginView: View {
-  @ObservedObject var userViewModel: UserViewModel
+  @Bindable var userViewModel: UserViewModel
   @State private var email = ""
   @State private var password = ""
   @State private var signUpViewPresented = false
@@ -30,7 +30,7 @@ struct LoginView: View {
       Text("Friendly Chat")
         .font(.largeTitle)
         .fontWeight(.bold)
-        .foregroundColor(Color("FirebaseOrange"))
+        .foregroundStyle(Color("FirebaseOrange"))
 
       Text("LOGIN")
         .font(.title2)
@@ -39,7 +39,7 @@ struct LoginView: View {
       VStack(spacing: 16) {
         HStack {
           Image(systemName: "envelope.fill")
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
           TextField("Email", text: $email)
             .keyboardType(.emailAddress)
             .textInputAutocapitalization(.never)
@@ -47,16 +47,16 @@ struct LoginView: View {
         }
         .padding()
         .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .clipShape(.rect(cornerRadius: 10))
 
         HStack {
           Image(systemName: "lock.fill")
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
           SecureField("Password", text: $password)
         }
         .padding()
         .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .clipShape(.rect(cornerRadius: 10))
       }
       .padding(.horizontal, 32)
 
@@ -67,11 +67,11 @@ struct LoginView: View {
       }) {
         Text("LOGIN")
           .font(.headline)
-          .foregroundColor(.white)
+          .foregroundStyle(.white)
           .padding()
           .frame(maxWidth: .infinity)
           .background(Color("FirebaseOrange"))
-          .cornerRadius(25)
+          .clipShape(Capsule())
       }
       .padding(.horizontal, 32)
 
@@ -81,24 +81,20 @@ struct LoginView: View {
           signUpViewPresented = true
         }
         .fontWeight(.bold)
-        .foregroundColor(Color("FirebaseOrange"))
+        .foregroundStyle(Color("FirebaseOrange"))
       }
       .sheet(isPresented: $signUpViewPresented) {
         SignUpView(userViewModel: userViewModel, isPresented: $signUpViewPresented)
       }
     }
-    .alert(isPresented: $userViewModel.showAlert) {
-      Alert(
-        title: Text("Notice"),
-        message: Text(userViewModel.errorMessage ?? ""),
-        dismissButton: .default(Text("OK"))
-      )
+    .alert("Notice", isPresented: $userViewModel.showAlert) {
+      Button("OK", role: .cancel) { }
+    } message: {
+      Text(userViewModel.errorMessage ?? "")
     }
   }
 }
 
-struct LoginView_Previews: PreviewProvider {
-  static var previews: some View {
-    LoginView(userViewModel: UserViewModel())
-  }
+#Preview {
+  LoginView(userViewModel: UserViewModel())
 }
