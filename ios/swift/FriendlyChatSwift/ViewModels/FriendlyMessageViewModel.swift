@@ -35,7 +35,9 @@ class FriendlyMessageViewModel: ObservableObject {
       dict["id"] = snapshot.key
       if let data = try? JSONSerialization.data(withJSONObject: dict),
          let message = try? JSONDecoder().decode(FriendlyMessage.self, from: data) {
-        self.messages.append(message)
+        Task { @MainActor in
+          self.messages.append(message)
+        }
       }
     }
   }

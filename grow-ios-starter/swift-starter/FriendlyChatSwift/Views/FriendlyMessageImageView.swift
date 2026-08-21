@@ -62,7 +62,12 @@ struct FriendlyMessageImageView: View {
             let downloadedImage = UIImage(data: data) else { return }
       self.image = downloadedImage
     } else {
-      let storageRef = Storage.storage().reference(withPath: imageUrl)
+      let storageRef: StorageReference
+      if imageUrl.hasPrefix("gs://") {
+        storageRef = Storage.storage().reference(forURL: imageUrl)
+      } else {
+        storageRef = Storage.storage().reference(withPath: imageUrl)
+      }
       if let data = try? await storageRef.data(maxSize: 5 * 1024 * 1024),
          let downloadedImage = UIImage(data: data) {
         self.image = downloadedImage

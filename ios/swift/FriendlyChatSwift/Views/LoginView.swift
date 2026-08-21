@@ -42,8 +42,8 @@ struct LoginView: View {
             .foregroundColor(.gray)
           TextField("Email", text: $email)
             .keyboardType(.emailAddress)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
         }
         .padding()
         .background(Color(.systemGray6))

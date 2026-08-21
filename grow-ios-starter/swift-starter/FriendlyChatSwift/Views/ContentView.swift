@@ -58,9 +58,10 @@ struct ContentView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
-            .onChange(of: messageViewModel.messages.count) { _ in
+            .onChange(of: messageViewModel.messages.count) { count in
+              guard count > 0 else { return }
               withAnimation(.easeInOut) {
-                scrollViewReader.scrollTo(messageViewModel.messages.count - 1, anchor: .bottom)
+                scrollViewReader.scrollTo(count - 1, anchor: .bottom)
               }
             }
           }

@@ -40,7 +40,7 @@ struct SignUpView: View {
           Image(systemName: "person.fill")
             .foregroundColor(.gray)
           TextField("Display Name", text: $displayName)
-            .disableAutocorrection(true)
+            .autocorrectionDisabled()
         }
         .padding()
         .background(Color(.systemGray6))
@@ -51,8 +51,8 @@ struct SignUpView: View {
             .foregroundColor(.gray)
           TextField("Email", text: $email)
             .keyboardType(.emailAddress)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
         }
         .padding()
         .background(Color(.systemGray6))

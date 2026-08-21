@@ -5,13 +5,13 @@ set -eo pipefail
 EXIT_STATUS=0
 
 if [ -d "${DIR}/FriendlyChat${LANGUAGE}.xcworkspace" ]; then
-  BUILD_TARGET="-workspace ${DIR}/FriendlyChat${LANGUAGE}.xcworkspace"
+  BUILD_TARGET=(-workspace "${DIR}/FriendlyChat${LANGUAGE}.xcworkspace")
 else
-  BUILD_TARGET="-project ${DIR}/FriendlyChat${LANGUAGE}.xcodeproj"
+  BUILD_TARGET=(-project "${DIR}/FriendlyChat${LANGUAGE}.xcodeproj")
 fi
 
 (xcodebuild \
-  ${BUILD_TARGET} \
+  "${BUILD_TARGET[@]}" \
   -scheme FriendlyChat${LANGUAGE} \
   -sdk iphonesimulator \
   -destination 'generic/platform=iOS Simulator' \
