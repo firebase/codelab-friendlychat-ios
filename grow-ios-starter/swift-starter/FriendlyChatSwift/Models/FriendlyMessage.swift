@@ -18,9 +18,10 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct FriendlyMessage: Identifiable, Codable {
-  var id: String
+  @DocumentID var id: String?
   var text: String?
   var displayName: String?
   var imageUrl: String?
@@ -35,7 +36,7 @@ struct FriendlyMessage: Identifiable, Codable {
     case userId
   }
 
-  init(id: String, text: String? = nil, displayName: String? = nil, imageUrl: String? = nil, userId: String? = nil) {
+  init(id: String? = nil, text: String? = nil, displayName: String? = nil, imageUrl: String? = nil, userId: String? = nil) {
     self.id = id
     self.text = text
     self.displayName = displayName
@@ -45,7 +46,7 @@ struct FriendlyMessage: Identifiable, Codable {
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    id = try container.decodeIfPresent(String.self, forKey: .id) ?? UUID().uuidString
+    _id = try container.decodeIfPresent(DocumentID<String>.self, forKey: .id) ?? DocumentID(wrappedValue: nil)
     text = try container.decodeIfPresent(String.self, forKey: .text)
     if let name = try container.decodeIfPresent(String.self, forKey: .displayName) {
       displayName = name
@@ -58,10 +59,8 @@ struct FriendlyMessage: Identifiable, Codable {
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(id, forKey: .id)
     try container.encodeIfPresent(text, forKey: .text)
     try container.encodeIfPresent(displayName, forKey: .displayName)
-    try container.encodeIfPresent(displayName, forKey: .name)
     try container.encodeIfPresent(imageUrl, forKey: .imageUrl)
     try container.encodeIfPresent(userId, forKey: .userId)
   }

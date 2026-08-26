@@ -20,51 +20,47 @@
 import SwiftUI
 import Observation
 import FirebaseAuth
-import FirebaseDatabase
+import FirebaseFirestore
 
 @MainActor
 @Observable
 final class FriendlyMessageViewModel {
   var messages: [FriendlyMessage] = []
   @ObservationIgnored
-  private let dbRef = Database.database().reference().child("messages")
-  @ObservationIgnored
-  private var refHandle: DatabaseHandle?
+  private var listenerRegistration: ListenerRegistration?
 
   func startListening() {
     stopListening()
-    refHandle = dbRef.observe(.childAdded) { [weak self] snapshot in
-      guard let self = self,
-            var dict = snapshot.value as? [String: Any] else { return }
-      dict["id"] = snapshot.key
-      if let data = try? JSONSerialization.data(withJSONObject: dict),
-         let message = try? JSONDecoder().decode(FriendlyMessage.self, from: data) {
-        Task { @MainActor in
-          self.messages.append(message)
+    let db = Firestore.firestore()
+    listenerRegistration = db.collection("messages")
+      .addSnapshotListener { [weak self] querySnapshot, error in
+        guard let self = self, let snapshot = querySnapshot else {
+          if let error = error {
+            print("Error listening for messages: \(error)")
+          }
+          return
+        }
+        self.messages = snapshot.documents.compactMap { document in
+          try? document.data(as: FriendlyMessage.self)
         }
       }
-    }
   }
 
   func stopListening() {
-    if let handle = refHandle {
-      dbRef.removeObserver(withHandle: handle)
-      refHandle = nil
-    }
+    listenerRegistration?.remove()
+    listenerRegistration = nil
     messages.removeAll()
   }
 
   func sendMessage(text: String?, imageUrl: String?) async throws {
     guard let currentUser = Auth.auth().currentUser else { return }
-    let newChildRef = dbRef.childByAutoId()
     let message = FriendlyMessage(
-      id: newChildRef.key ?? UUID().uuidString,
       text: text,
       displayName: currentUser.displayName ?? currentUser.email ?? "Anonymous",
       imageUrl: imageUrl,
       userId: currentUser.uid
     )
-    guard let dict = try? JSONSerialization.jsonObject(with: JSONEncoder().encode(message)) else { return }
-    try await newChildRef.setValue(dict)
+    let db = Firestore.firestore()
+    _ = try db.collection("messages").addDocument(from: message)
   }
 }

@@ -20,27 +20,25 @@
 import SwiftUI
 import Observation
 import FirebaseAuth
-import FirebaseDatabase
+import FirebaseFirestore
 
 @MainActor
 @Observable
 final class FriendlyMessageViewModel {
   var messages: [FriendlyMessage] = []
   @ObservationIgnored
-  private let dbRef = Database.database().reference().child("messages")
-  @ObservationIgnored
-  private var refHandle: DatabaseHandle?
+  private var listenerRegistration: ListenerRegistration?
 
   func startListening() {
     stopListening()
-    // TODO: Observe Realtime Database childAdded events
+    // TODO: Observe Firestore messages collection snapshot events
   }
 
   func stopListening() {
-    // TODO: Remove Realtime Database observer
+    // TODO: Remove Firestore listener registration
   }
 
   func sendMessage(text: String?, imageUrl: String?) async throws {
-    // TODO: Write FriendlyMessage to Realtime Database
+    // TODO: Write FriendlyMessage to Firestore messages collection
   }
 }

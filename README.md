@@ -8,7 +8,7 @@ This is the source code for the Firebase FriendlyChat codelab for iOS. It includ
 
 ### Projects Included
 - `ios-starter/swift-starter`: The starter SwiftUI project you will build upon in the Swift Codelab (using Xcode and Swift Package Manager).
-- `ios/swift`: The finished SwiftUI app with complete implementation of Firebase Authentication, Realtime Database, and Cloud Storage.
+- `ios/swift`: The finished SwiftUI app with complete implementation of Firebase Authentication, Cloud Firestore, and Cloud Storage.
 - `ios-starter/objc-starter` & `ios/objc`: Legacy Objective-C starter and completed projects.
 
 ## How to make contributions?
