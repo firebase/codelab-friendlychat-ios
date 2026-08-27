@@ -27,15 +27,15 @@ import FirebaseFirestore
 final class FriendlyMessageViewModel {
   var messages: [FriendlyMessage] = []
   @ObservationIgnored
-  private var listenerRegistration: ListenerRegistration?
+  private var listenerTask: Task<Void, Never>?
 
   func startListening() {
     stopListening()
-    // TODO: Observe Firestore messages collection snapshot events
+    // TODO: Observe Firestore snapshots AsyncSequence
   }
 
   func stopListening() {
-    // TODO: Remove Firestore listener registration
+    // TODO: Cancel listener task
   }
 
   func sendMessage(text: String?, imageUrl: String?) async throws {

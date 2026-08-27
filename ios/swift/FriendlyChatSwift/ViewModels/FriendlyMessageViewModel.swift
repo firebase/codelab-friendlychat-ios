@@ -27,28 +27,27 @@ import FirebaseFirestore
 final class FriendlyMessageViewModel {
   var messages: [FriendlyMessage] = []
   @ObservationIgnored
-  private var listenerRegistration: ListenerRegistration?
+  private var listenerTask: Task<Void, Never>?
 
   func startListening() {
     stopListening()
-    let db = Firestore.firestore()
-    listenerRegistration = db.collection("messages")
-      .addSnapshotListener { [weak self] querySnapshot, error in
-        guard let self = self, let snapshot = querySnapshot else {
-          if let error = error {
-            print("Error listening for messages: \(error)")
+    listenerTask = Task {
+      let db = Firestore.firestore()
+      do {
+        for try await snapshot in db.collection("messages").snapshots {
+          self.messages = snapshot.documents.compactMap { document in
+            try? document.data(as: FriendlyMessage.self)
           }
-          return
         }
-        self.messages = snapshot.documents.compactMap { document in
-          try? document.data(as: FriendlyMessage.self)
-        }
+      } catch {
+        print("Error listening for messages: \(error)")
       }
+    }
   }
 
   func stopListening() {
-    listenerRegistration?.remove()
-    listenerRegistration = nil
+    listenerTask?.cancel()
+    listenerTask = nil
     messages.removeAll()
   }
 
