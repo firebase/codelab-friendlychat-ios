@@ -16,6 +16,7 @@
 		6D1CEB94DC738B6D00C79890 /* FriendlyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD525F044EF30F6E829D073 /* FriendlyMessage.swift */; };
 		76EFBCE764E49DC331695269 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC069E3AC48FF7EC173DA8C /* ContentView.swift */; };
 		8DBECA17303F9C3C00927717 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8DBECA16303F9C3C00927717 /* FirebaseFirestore */; };
+		8DBECA1C303FA3C800927717 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 17736B3C989694E25473CE7C /* FirebaseDatabase */; };
 		96F4781712D71426C2C5D0E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FC28A10A9AF1B45E474161D /* GoogleService-Info.plist */; };
 		9CED26083BB1BC268B3BE004 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED82E90882211A500080E97 /* UserViewModel.swift */; };
 		A0E713A6F1DF3D497757B854 /* FriendlyChatSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2DDA879335D37F9250246D /* FriendlyChatSwiftApp.swift */; };
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBECA1C303FA3C800927717 /* FirebaseDatabase in Frameworks */,
 				EBA060EAE1432868D83084F8 /* FirebaseAuth in Frameworks */,
 				8DBECA17303F9C3C00927717 /* FirebaseFirestore in Frameworks */,
 				1E603898B9A499339A32E5BD /* FirebaseStorage in Frameworks */,
@@ -332,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "65c2088b-2425-4961-b6d5-0256d4790678";
@@ -383,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "65c2088b-2425-4961-b6d5-0256d4790678";
 				SDKROOT = iphoneos;
@@ -404,7 +406,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FriendlyChatSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,7 +430,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FriendlyChatSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

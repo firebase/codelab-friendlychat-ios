@@ -29,16 +29,14 @@ final class UserViewModel {
   var showAlert = false
 
   @ObservationIgnored
-  private var authStateHandle: AuthStateDidChangeListenerHandle?
+  private var authTask: Task<Void, Never>?
 
   init() {
-    // TODO: Register Auth state change listener
+    // TODO: Observe Auth state changes using authStateChanges AsyncSequence
   }
 
   deinit {
-    if let handle = authStateHandle {
-      Auth.auth().removeStateDidChangeListener(handle)
-    }
+    authTask?.cancel()
   }
 
   func signIn(email: String, password: String) async {
